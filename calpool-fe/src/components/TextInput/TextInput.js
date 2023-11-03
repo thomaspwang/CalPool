@@ -2,9 +2,7 @@ import React from "react";
 import "./TextInput.css";
 
 const TextInput = ({
-  handleFormChange,
   placeholder,
-  required,
   className,
   width,
   height,
@@ -30,7 +28,6 @@ const TextInput = ({
     backgroundColor: bgColor,
   };
 
-  console.log(error)
   return (
     <input
       type={type}
