@@ -1,5 +1,5 @@
 /* Bttn.css */
-.bttn-custom {
+.button-custom {
     /* Default values */
     --bttn-width: auto;
     --bttn-height: auto;
@@ -13,14 +13,16 @@
     padding: var(--bttn-padding-y) var(--bttn-padding-x);
     text-transform: none;
     border: none;
-    border-radius:.5rem;
+    border-radius:.25rem;
     color: var(--bttn-color);
     background-color: var(--bttn-bg);
-    transition: scale 100ms ease-in-out;
+    transition: filter 100ms ease-in-out;
+    font-size: 1.1rem;
+    font-weight: 600;
   }
 
-  .bttn-custom:hover {
+  .button-custom:hover {
     cursor: pointer;
-    scale: 1.05;
+    filter: brightness(85%);
   }
   
