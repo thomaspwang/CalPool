@@ -1,26 +1,22 @@
 /* Bttn.css */
-.bttn-custom {
-    /* Default values */
-    --bttn-width: auto;
-    --bttn-height: auto;
-    --bttn-padding-x: 30px;
-    --bttn-padding-y: 10px;
-    --bttn-color: black;
-    --bttn-bg: gray;
-  
-    width: var(--bttn-width);
-    height: var(--bttn-height);
-    padding: var(--bttn-padding-y) var(--bttn-padding-x);
-    text-transform: none;
-    border: none;
-    border-radius:.5rem;
-    color: var(--bttn-color);
-    background-color: var(--bttn-bg);
-    transition: scale 100ms ease-in-out;
-  }
+.button-custom {
+  /* Default values */
 
-  .bttn-custom:hover {
-    cursor: pointer;
-    scale: 1.05;
-  }
-  
+  padding: 10px 30px;
+  text-transform: none;
+  border: none;
+  border-radius:.25rem;
+  color: black;
+  background-color: gray;
+  transition: filter 100ms ease-in-out;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-custom:hover {
+  cursor: pointer;
+  filter: brightness(85%);
+}

@@ -1,17 +1,38 @@
 import React from "react";
 import "./Button.css";
+import { CircularProgress } from "@mui/material";
 
-const Button = ({ children, w, h, px, py, bg, color }) => {
+const Button = ({
+  children,
+  width,
+  height,
+  px,
+  py,
+  bgColor,
+  color,
+  className,
+  onClick,
+  loading,
+  loadColor='white'
+}) => {
   const style = {
-    "--bttn-width": w,
-    "--bttn-height": h,
-    "--bttn-padding-x": px,
-    "--bttn-padding-y": py,
-    "--bttn-color": color,
-    "--bttn-bg": bg
+    width: width || "auto", // Set a default width or pass a specific prop
+    height: height || "auto", // Set a default height or pass a specific prop
+    padding: `${py} ${px}`,
+    color: color,
+    backgroundColor: bgColor,
   };
 
-  return <button class="bttn-custom" style={style}>{children}</button>;
+  return (
+    <button
+      href="www.google.com"
+      className={`button-custom ${className}`}
+      style={style}
+      onClick={onClick}
+    >
+      {loading ? <CircularProgress size={24} sx={{ color: loadColor }} /> : children}
+    </button>
+  );
 };
 
 export default Button;
