@@ -1,18 +1,16 @@
-/* Bttn.css */
 .text-input-custom {
-  /* Default values */
-  box-sizing:border-box;
-  width: 100%;
-  height: auto;
-  padding: 10px 10px;
-  border-radius: 0.25rem;
-  color: black;
-  background-color: rgb(209, 209, 209);
-  outline: none;
-  border: none;
-  font-size: 1.1rem;
-}
-
-.error {
-    outline: red solid 1px;
-}
+    box-sizing:border-box;
+    width: 100%;
+    height: auto;
+    padding: 10px 10px;
+    border-radius: 0.25rem;
+    color: black;
+    background-color: rgb(209, 209, 209);
+    outline: none;
+    border: none;
+    font-size: 1.1rem;
+  }
+  
+  .error {
+      outline: red solid 1px;
+  }
