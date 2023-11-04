@@ -25,7 +25,6 @@ const Button = ({
 
   return (
     <button
-      href="www.google.com"
       className={`button-custom ${className}`}
       style={style}
       onClick={onClick}
