@@ -55,7 +55,7 @@ const Login = () => {
       <div className="header-container">
         <h1 className="sign-in-text">Sign In</h1>
         <Link
-          href=""
+          href="/signup"
           underline="hover"
           variant="body2"
           color="primary"

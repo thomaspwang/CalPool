@@ -76,7 +76,7 @@ const SignUp = () => {
       <div className="header-container">
         <h1 className="create-account-text">Create Account</h1>
         <Link
-          href=""
+          href="/login"
           underline="hover"
           variant="body2"
           color="primary"
