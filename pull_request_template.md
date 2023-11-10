@@ -4,7 +4,7 @@
 - For frontend changes, include screenshots / videos of the UI
 - For backend changes, include screenshots of successful Postman API calls
 
-## Jira Issue ticket number and link:
+## Trello Task Link:
 
 ## Checklist before requesting a review
 - [ ] I have performed a self-review of my code
