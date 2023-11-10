@@ -4,6 +4,11 @@ const handleFormChange = (event, setForm) => {
   setForm((prev) => ({ ...prev, [name]: { value: value, error: "" } }));
 };
 
+const isInt = (number) => {
+  const intRegex = /^[0-9]\d*$/;
+  return intRegex.test(number);
+}
+
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);

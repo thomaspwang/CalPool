@@ -7,13 +7,15 @@ import {
 } from "react-router-dom";
 import Login from './pages/Login/Login'
 import SignUp from './pages/SignUp/SignUp'
+import InputUserInfo from './pages/InputUserInfo/InputUserInfo';
 import { ThemeProvider } from '@mui/material/styles';
 
 function App() {
   return (
-    <ThemeProvider theme={theme} className="App">
+    <ThemeProvider theme={theme}>
       <Router>
         <Routes>
+          <Route path='/userinfo' element={<InputUserInfo/>} />
           <Route path='/signup' element={<SignUp/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/about">
