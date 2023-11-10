@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import theme from './theme';    
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -7,10 +7,11 @@ import {
 } from "react-router-dom";
 import Login from './pages/Login/Login'
 import SignUp from './pages/SignUp/SignUp'
+import { ThemeProvider } from '@mui/material/styles';
 
 function App() {
   return (
-    <div className="App">
+    <ThemeProvider theme={theme} className="App">
       <Router>
         <Routes>
           <Route path='/signup' element={<SignUp/>} />
@@ -23,7 +24,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
-    </div>
+    </ThemeProvider>
   );
 }
 

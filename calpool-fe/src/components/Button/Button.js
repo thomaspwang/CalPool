@@ -1,40 +1,21 @@
 import React from "react";
-import "./Button.css";
-import { CircularProgress } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 
-const Button = ({
-  children,
-  width,
-  height,
-  px,
-  py,
-  bgColor,
-  color,
-  className,
-  onClick,
-  loading,
-  loadColor='white'
-}) => {
-  const style = {
-    width: width || "auto", // Set a default width or pass a specific prop
-    height: height || "auto", // Set a default height or pass a specific prop
-    padding: `${py} ${px}`,
-    color: color,
-    backgroundColor: bgColor,
-  };
-
+const Button = ({ children, color, onClick, loading, type }) => {
   return (
-    <button
-      className={`button-custom ${className}`}
-      style={style}
+    <LoadingButton
+      type={type}
+      color={color}
       onClick={onClick}
+      loading={loading}
+      variant="contained"
+      className="LoadingButton"
+      sx= {{ fontWeight: '600'}}
+      disableRipple
     >
-      {loading ? <CircularProgress size={24} sx={{ color: loadColor }} /> : children}
-    </button>
+      {children}
+    </LoadingButton>
   );
 };
 
 export default Button;
-
-
-

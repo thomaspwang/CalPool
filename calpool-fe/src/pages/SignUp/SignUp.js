@@ -95,7 +95,7 @@ const SignUp = () => {
       <TextInput type={showPass ? 'text' : 'password'} pr='50px' error={form.password.error} placeholder="Password" name='password' onChange={handleFormChange} value={form.password.value}/>
       <h1 className="show-button" onClick={toggleShow}>show</h1>
       </div>
-      <Button type="submit" width="100%">Create Account</Button>
+      <Button type="submit">Create Account</Button>
       </form>
     </div>
   );

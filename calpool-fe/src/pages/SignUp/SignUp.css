@@ -42,10 +42,6 @@ h1 {
     gap: 15px;
 }
 
-.test {
-    border: 1px solid black
-}
-
 .password {
     position: relative
 }
@@ -53,8 +49,7 @@ h1 {
 .show-button{
     position: absolute;
     right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 11px;
     font-weight: 400;
     font-size: .8rem;
 }

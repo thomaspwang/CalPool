@@ -1,5 +1,6 @@
 import React from "react";
 import "./TextInput.css";
+import { TextField } from "@mui/material";
 
 const TextInput = ({
   placeholder,
@@ -29,16 +30,19 @@ const TextInput = ({
   };
 
   return (
-    <input
-      type={type}
-      name={name}
-      className={`text-input-custom ${className} ${error && 'error'}`}
-      spellCheck="false"
-      placeholder={placeholder}
-      style={style}
-      onChange={onChange}
-      value={value}
-    />
+    <div>
+      <input
+        type={type}
+        name={name}
+        className={`text-input-custom ${className} ${error && 'error'}`}
+        spellCheck="false"
+        placeholder={placeholder}
+        style={style}
+        onChange={onChange}
+        value={value}
+        />
+        {error && <h1 className="error-label">{error}</h1>}
+      </div>
   );
 };
 

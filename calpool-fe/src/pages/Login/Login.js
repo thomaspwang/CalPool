@@ -30,18 +30,18 @@ const Login = () => {
       password: { ...form.password, error: "" },
     };
   
-    function validateEmail(email) {
+    const validateEmail = (email) => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return emailRegex.test(email);
     }
   
     if (!validateEmail(updatedState.email.value)) {
-      updatedState.email.error = 'only-outline';
+      updatedState.email.error = 'Please enter a valid email';
       isValid = false;
     }
   
-    if (!updatedState.password.value.length) {
-      updatedState.password.error = 'only-outline';
+    if (isValid && !updatedState.password.value.length) {
+      updatedState.password.error = 'Invalid password';
       isValid = false;
     }
     !isValid && setForm(updatedState);
@@ -67,13 +67,13 @@ const Login = () => {
       <form onSubmit={handleSubmit} className="form">
       <TextInput type='text' error={form.email.error} placeholder="Email" name='email' onChange={handleFormChange} value={form.email.value}/>
       <TextInput type='password' error={form.password.error} placeholder="Password" name='password' onChange={handleFormChange} value={form.password.value}/>
-      <Button type="submit" width="100%">Sign In</Button>
+      <Button type='submit' color='primary' loading={false}>Sign In</Button>
       </form>
       <Link
           href=""
           underline="hover"
           variant="body2"
-          color="#777777"
+          color="secondary"
           sx={{ fontWeight: "bold" }}
         >
           Forgot Password?
