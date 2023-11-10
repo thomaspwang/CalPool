@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import ViewCarpools from './pages/ViewCarpools.js';
 import {
   BrowserRouter as Router,
   Route,
@@ -14,6 +15,8 @@ function App() {
           <Route path="/about">
           </Route>
           <Route path="/users">
+          </Route>
+          <Route path="/view_carpools" element={<ViewCarpools/>}>
           </Route>
           <Route path="/" element={<div>HELLO WORLD</div>}>
           </Route>
