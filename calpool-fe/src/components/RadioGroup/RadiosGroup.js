@@ -1,8 +1,9 @@
 import { FormControl, FormLabel, RadioGroup } from "@mui/material";
 import RadioButton from "./RadioButton";
+import ErrorText from "../ErrorText/ErrorText";
 import "./RadiosGroup.css";
 
-export default function RadiosGroup({ radios, label, onChange, name, value }) {
+export default function RadiosGroup({ radios, label, onChange, name, value, error}) {
   return (
     <>
       <h1 className="label">{label}</h1>
@@ -13,6 +14,7 @@ export default function RadiosGroup({ radios, label, onChange, name, value }) {
           ))}
         </div>
       </RadioGroup>
+      {error && <ErrorText error={error}/>}
     </>
   );
 }

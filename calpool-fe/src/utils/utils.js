@@ -9,7 +9,7 @@ const isInt = (number) => {
   return intRegex.test(number);
 }
 
-function validateEmail(email) {
+const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
@@ -82,5 +82,32 @@ const validateFormSignUp = (form, setForm) => {
     return isValid;
   };
 
+  const validateFormUserInfo = (form, setForm) => {
+    let isValid = true;
+    const updatedState = {
+      ...form,
+      number: { ...form.number, error: "" },
+      major: { ...form.major, error: "" },
+      gender: { ...form.gender, error: "" },
+      grad_year: { ...form.grad_year, error: "" },
+    };
+    if (!isInt(updatedState.number.value)) {
+      updatedState.number.error = 'Please enter a valid phone number using only digits';
+      isValid = false;
+    }
+    if (!updatedState.major.value.trim()) {
+      updatedState.major.error = 'Please enter your major';
+      isValid = false;
+    }
+    if (!updatedState.gender.value) {
+      updatedState.gender.error = 'Please input your gender';
+      isValid = false;
+    }
 
-export { handleFormChange, validateFormSignUp, validateFormLogin};
+    !isValid && setForm(updatedState);
+  
+    return isValid;
+  }
+
+
+export { handleFormChange, validateFormSignUp, validateFormLogin, validateFormUserInfo};

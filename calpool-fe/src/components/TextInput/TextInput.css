@@ -14,10 +14,3 @@
   .error {
       outline: red solid 1px;
   }
-
-  .error-label {
-    font-weight: 300;
-    font-size: .8rem;
-    color: red;
-    text-align: start;
-  }
