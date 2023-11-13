@@ -1,0 +1,116 @@
+.close-icon {
+    position: absolute;
+    width: 20px; 
+    height: 20px;
+    background-image: url('https://cdn.iconscout.com/icon/free/png-256/free-close-2694341-2236131.png'); 
+    background-size: cover;
+
+
+
+}
+
+
+.modal, .overlay {
+    width: 100 vw; 
+    height: 100vh; 
+    top: 0; 
+    left: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    position: fixed;
+    display: flex; 
+    flex-direction: column;
+}
+
+
+.overlay {
+    background: rgba(49,49,49,0.8); 
+}
+
+.modal-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.modal-content {
+    background-color:white;
+    padding: 20px;
+    border-radius: 20px;
+    top: 50%; 
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.people {
+    display: flex;
+    flex-direction: row;
+}
+
+#identity {
+    color: #B2B2B2
+}
+
+.Creator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.Riders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.circleInModal {
+    height: 40px;
+    width: 40px;
+    background-color: #393939;
+    border-radius: 50%;
+    display: inline-block; 
+}
+
+.pfpInModal {
+    display: flex;
+}
+
+.pfpWName {
+    align-items: center;
+
+}
+
+.dateAndPickup, .drop-off {
+    font-family: 'Inter', sans-serif; 
+    font-weight: 500;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#googleMapLink {
+    color: #B2B2B2;
+    text-decoration: underline;
+}
+
+.joinOrLeave {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

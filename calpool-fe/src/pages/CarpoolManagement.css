@@ -1,0 +1,12 @@
+.CM__organization{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
