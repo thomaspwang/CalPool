@@ -73,21 +73,17 @@ function Modal ({onClose}) {
 
                 </div>
 
-                <a id="google-map-link" href="https://maps.google.com" target="_blank">View Trip On Google Maps </a>
+                <a id="google-map-link" href="https://maps.google.com" target="blank" rel="nonreferrer">View Trip On Google Maps </a>
 
 
 
                 
-                {/* <img src="https://www.figma.com/file/o4oE5rNfNEnhUsOgKr45Tz/CalPool-(WIP!!)?type=design&node-id=116-425&mode=design&t=qdLLgoX4XD4gJ7Oc-4"
-                alt="Close Icon"
-                onClick={handleClose}></img> */}
 
                 <div className="join-or-leave">
                     <Button>Invite Others</Button>
                     <Button>Leave Group</Button>
                 </div>
 
-                {/* <Button onClick={handleClose}>Close</Button> */}
 
                 
                 
