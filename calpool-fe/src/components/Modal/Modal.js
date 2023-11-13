@@ -14,8 +14,10 @@ function Modal ({onClose}) {
             <div className="overlay"></div>
             <div className="modal-container">
             <div className = "modal-content">
-                <h2>Trip Details : </h2>
-                <span className="close-icon" onClick={handleClose}></span>
+                <div className = "top" >
+                    <span className="close-icon" onClick={handleClose}></span>
+                    <h2>Trip Details : </h2>
+                </div>
 
                 <div className="people">
                     <div className = "creator">
