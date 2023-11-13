@@ -59,21 +59,21 @@
     color: #B2B2B2
 }
 
-.Creator {
+.creator {
     display: flex;
     flex-direction: column;
     align-items: center;
 
 }
 
-.Riders {
+.riders {
     display: flex;
     flex-direction: column;
     align-items: center;
 
 }
 
-.circleInModal {
+.circle-in-modal {
     height: 40px;
     width: 40px;
     background-color: #393939;
@@ -81,16 +81,16 @@
     display: inline-block; 
 }
 
-.pfpInModal {
+.pfp-in-modal {
     display: flex;
 }
 
-.pfpWName {
+.pfp-w-name {
     align-items: center;
 
 }
 
-.dateAndPickup, .drop-off {
+.date-and-pickup, .drop-off {
     font-family: 'Inter', sans-serif; 
     font-weight: 500;
     font-size: 12px;
@@ -104,12 +104,12 @@
     gap: 20px;
 }
 
-#googleMapLink {
+#google-map-link {
     color: #B2B2B2;
     text-decoration: underline;
 }
 
-.joinOrLeave {
+.join-or-leave {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

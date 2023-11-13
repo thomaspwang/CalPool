@@ -18,11 +18,11 @@ function Modal ({onClose}) {
                 <span className="close-icon" onClick={handleClose}></span>
 
                 <div className="people">
-                    <div className = "Creator">
+                    <div className = "creator">
                         <p id='identity'>Creator : </p>
-                        <div className = "pfpInModal">
-                            <div className = "pfpWName">
-                            <span className="circleInModal"></span>
+                        <div className = "pfp-in-modal">
+                            <div className = "pfp-w-name">
+                            <span className="circle-in-modal"></span>
                             <p>Oski Bear</p>
 
                             </div>
@@ -31,19 +31,19 @@ function Modal ({onClose}) {
 
                     </div>
 
-                    <div className = "Riders">
+                    <div className = "riders">
                         <p id='identity'>Sharing this ride : </p>
-                        <div className = "pfpInModal">
-                            <div className = "pfpWName">
-                                <span className="circleInModal"></span>
+                        <div className = "pfp-in-modal">
+                            <div className = "pfp-w-name">
+                                <span className="circle-in-modal"></span>
                                 <p>Doski Bear</p>
                             </div>
-                            <div className = "pfpWName">
-                                <span className="circleInModal"></span>
+                            <div className = "pfp-w-name">
+                                <span className="circle-in-modal"></span>
                                 <p>Doski Bearra</p>
                             </div>
-                            <div className = "pfpWName">
-                                <span className="circleInModal"></span>
+                            <div className = "pfp-w-name">
+                                <span className="circle-in-modal"></span>
                                 <p>Loski Berran</p>
                             </div>
                         </div>
@@ -54,7 +54,7 @@ function Modal ({onClose}) {
 
                 <div className = "info">
 
-                    <div className="dateAndPickup"> 
+                    <div className="date-and-pickup"> 
                             <p>Date: </p>
                             <p>Pick-up Time:</p>
                             <p>Pick-up Location: </p>
@@ -73,7 +73,7 @@ function Modal ({onClose}) {
 
                 </div>
 
-                <a id="googleMapLink" href="https://maps.google.com" target="_blank">View Trip On Google Maps </a>
+                <a id="google-map-link" href="https://maps.google.com" target="_blank">View Trip On Google Maps </a>
 
 
 
@@ -82,7 +82,7 @@ function Modal ({onClose}) {
                 alt="Close Icon"
                 onClick={handleClose}></img> */}
 
-                <div className="joinOrLeave">
+                <div className="join-or-leave">
                     <Button>Invite Others</Button>
                     <Button>Leave Group</Button>
                 </div>
