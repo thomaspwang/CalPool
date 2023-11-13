@@ -9,6 +9,7 @@ import {
 import Login from './pages/Login/Login'
 import SignUp from './pages/SignUp/SignUp'
 import InputUserInfo from './pages/InputUserInfo/InputUserInfo';
+import PictureUpload from './pages/PictureUpload/PictureUpload.js';
 import { ThemeProvider } from '@mui/material/styles';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
+          <Route path='/uploadpic' element={<PictureUpload/>} />
           <Route path='/userinfo' element={<InputUserInfo/>} />
           <Route path='/signup' element={<SignUp/>} />
           <Route path="/login" element={<Login/>} />

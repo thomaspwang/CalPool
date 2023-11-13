@@ -12,6 +12,7 @@ const InputUserInfo = () => {
     const genderRadioOptions = ['Female', 'Male', 'Other']
     const gradYearOptions = Array.from({ length: 5 }, (_, i) => new Date().getFullYear() + i);
 
+    const disabled = (!form.number.value || !form.major.value || !form.gender.value || !form.grad_year.value) ? true : false;
     const handleSubmit = (event) => {
       event.preventDefault();
       const isFormValid = validateFormUserInfo(form, setForm);
@@ -29,7 +30,7 @@ const InputUserInfo = () => {
         <TextInput type='text' error={form.major.error} placeholder="Major" name='major' onChange={(event) => handleFormChange(event, setForm)} value={form.major.value}/>
         <RadiosGroup radios={genderRadioOptions} error={form.gender.error} label='Gender' name='gender' onChange={(event) => handleFormChange(event, setForm)} value={form.gender.value}/>
         <Dropdown options={gradYearOptions} label='Graduation Year' name='grad_year' value={form.grad_year.value} onChange={(event) => handleFormChange(event, setForm)}/>
-      <Button type='submit' color='primary' loading={false}>Next</Button>
+      <Button type='submit' color='primary' loading={false} disabled={disabled}>Next</Button>
       </form>
     </div>
   )
