@@ -1,7 +1,7 @@
 .CM__organization{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 70px;
 }
 
 .cards {

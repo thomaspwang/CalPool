@@ -5,7 +5,7 @@ function ProfileDisplay({firstname, lastname, email, phone, instagram, img}) {
 
 
     return (
-        <div className = "container section">
+        <div className = "profile-container section">
             <div className = "contact__container grid">
                 <img src={img} alt="" className="home__img avatar" />
 
