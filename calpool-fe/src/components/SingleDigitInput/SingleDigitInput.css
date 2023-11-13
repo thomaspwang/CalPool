@@ -1,0 +1,13 @@
+.input-box {
+    width: 35px;
+    height: 40px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.25rem;
+    outline: none;
+    border: 1px solid black;
+}
+
+.wrong {
+    border: 1px solid red
+}

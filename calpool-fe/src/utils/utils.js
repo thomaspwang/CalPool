@@ -109,5 +109,69 @@ const validateFormSignUp = (form, setForm) => {
     return isValid;
   }
 
+  const handleKeyDownVerify = (event, code, setCode, inputRefs, setWrong) => {
+    const value = event.key;
+    const index = parseInt(event.target.name);
+    if (/^\d$/.test(value)) {
+      setWrong(false);
+      if (code[index]) {
+        event.preventDefault();
+      }
+      const updatedCode = [...code];
+      updatedCode[index] = value;
+      console.log(updatedCode);
+      setCode(updatedCode);
+      if (index < inputRefs.length - 1) {
+        event.preventDefault();
+        inputRefs[index + 1].current.focus();
+        inputRefs[index + 1].current.select();
+      }
+    } else if (value === "Backspace") {
+      if (!code[index] && index > 0) {
+        const updatedCode = [...code];
+        updatedCode[index - 1] = "";
+        setCode(updatedCode);
+        inputRefs[index - 1].current.focus();
+        inputRefs[index - 1].current.select();
+      } else if (code[index]) {
+        const updatedCode = [...code];
+        updatedCode[index] = "";
+        setCode(updatedCode);
+      }
+    } else if (value === "ArrowLeft") {
+      event.preventDefault();
+      if (index > 0) {
+        inputRefs[index - 1].current.focus();
+        inputRefs[index - 1].current.select();
+      }
+    }
+  };
 
-export { handleFormChange, validateFormSignUp, validateFormLogin, validateFormUserInfo};
+  const handlePasteVerify = (event, setWrong, code, inputRefs, setCode) => {
+    event.preventDefault();
+    const index = parseInt(event.target.name);
+    const pasteData = event.clipboardData.getData("text");
+    const digits = pasteData.split("").filter((char) => /^\d$/.test(char));
+
+    if (digits.length > 0) {
+      setWrong(false);
+      const updatedCode = [...code];
+      for (let i = index; i < inputRefs.length; i++) {
+        if (digits[i - index]) {
+          updatedCode[i] = digits[i - index];
+        }
+      }
+      setCode(updatedCode);
+
+      const nextInput = inputRefs.find(
+        (ref, i) => i > index && !updatedCode[i]
+      );
+      if (nextInput) {
+        nextInput.current.focus();
+        nextInput.current.select();
+      }
+    }
+  };
+
+
+export { handleFormChange, validateFormSignUp, validateFormLogin, validateFormUserInfo, handleKeyDownVerify, handlePasteVerify};

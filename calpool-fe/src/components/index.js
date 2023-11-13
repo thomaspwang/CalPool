@@ -5,5 +5,6 @@ import RadiosGroup from "./RadioGroup/RadiosGroup";
 import Dropdown from "./Dropdown/Dropdown";
 import CarpoolCard from "./CarpoolCard/CarpoolCard";
 import ErrorText from "./ErrorText/ErrorText";
+import SingleDigitInput from "./SingleDigitInput/SingleDigitInput";
 
-export {Button, TextInput, RadioButton, RadiosGroup, Dropdown, CarpoolCard, ErrorText }
+export {Button, TextInput, RadioButton, RadiosGroup, Dropdown, CarpoolCard, ErrorText, SingleDigitInput}
