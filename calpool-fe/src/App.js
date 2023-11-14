@@ -12,12 +12,14 @@ import InputUserInfo from './pages/InputUserInfo/InputUserInfo';
 import PictureUpload from './pages/PictureUpload/PictureUpload.js';
 import Verification from './pages/Verification/Verification.js';
 import { ThemeProvider } from '@mui/material/styles';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword.js';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
+          <Route path='/forgotpassword' element={<ForgotPassword />}/>
           <Route path='/verify' element={<Verification />} />
           <Route path='/uploadpic' element={<PictureUpload/>} />
           <Route path='/userinfo' element={<InputUserInfo/>} />

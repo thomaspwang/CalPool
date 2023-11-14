@@ -174,4 +174,4 @@ const validateFormSignUp = (form, setForm) => {
   };
 
 
-export { handleFormChange, validateFormSignUp, validateFormLogin, validateFormUserInfo, handleKeyDownVerify, handlePasteVerify};
+export { handleFormChange, validateFormSignUp, validateFormLogin, validateFormUserInfo, handleKeyDownVerify, handlePasteVerify, validateEmail};
