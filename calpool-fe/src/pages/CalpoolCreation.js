@@ -9,110 +9,148 @@ import TextField from '@mui/material/TextField';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import PeopleLogo from '../people.png'
+import { DialogContent, DialogTitle } from "@mui/material";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
 
 export default function CalpoolCreation() {
+    const [open, setOpen] = useState(false);
     const [depart, setDepart] = useState(dayjs());
     const [arrive, setArrive] = useState(dayjs());
-    const [range, setRange] = useState([20, 50])
+    const [range, setRange] = useState([20, 80]);
+    const [pickup, setPickUp] = useState('');
+    const [destination, setDestination] = useState('');
+    const [people, setPeople] = useState();
+    const [comments, setComments] = useState('');
+    
 
-    const handleChange = (event, newRange) => {
-        setRange(newRange);
+    const handleClickOpen = () => {
+        setOpen(true);
     };
 
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const marks = [
+        {
+            value: 0,
+            label: '$0',
+        },
+        {
+        value: 100,
+        label: '$100',
+        },
+    ]
+
     return (
-        <div className='overall-container'>
-            <div className='header-container-2'>
-                <h1 className="header">Create New CalPool</h1>
-            </div>
+        <>
+            <Button variant="outlined" onClick={handleClickOpen}>
+                Create New Calpool
+            </Button>
+            <Dialog open={open} onClose={handleClose}>
+                <h1 className='create-header'>Create New Calpool</h1>
+                <DialogContent>
+                    <div className='overall-container'>
 
-            <div className='details-container'>
-                <h2>Your Trip is from</h2>
-                <div className='date-details'>
-                    <div className='pickup date-inner'>
-                        {depart.format('ddd, MMM DD, hh:mm A')}
-                    </div>
-                    <div className='to date-inner'>
-                        to
-                    </div>
-                    <div className='destination date-inner'>
-                        {arrive.format('ddd, MMM DD, hh:mm A')}
-                    </div>
-                </div>
-            </div>
+                        <div className='details-container'>
+                            <div className='date-details'>
+                                <div className='pickup date-inner'>
+                                    {depart.format('ddd, MMM DD, hh:mm A')}
+                                </div>
+                                <div className='to date-inner'>
+                                    to
+                                </div>
+                                <div className='destination date-inner'>
+                                    {arrive.format('ddd, MMM DD, hh:mm A')}
+                                </div>
+                            </div>
+                        </div>
 
-            <div className='time-container'>
-                <div className='date-picker time-item'>
-                    <div>Depart By:</div>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker orientation="landscape" value={depart} onChange={(newValue) => setDepart(newValue)}/>
-                        <TimePicker label="Basic time picker" value={depart} onChange={(newValue) => setDepart(newValue)}/>
-                    </LocalizationProvider>
-                </div>
-                <div className='arrive-picker time-item'>
-                    <div>Arrive By:</div>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker orientation="landscape" value={arrive} onChange={(newValue) => setArrive(newValue)}/>
-                        <TimePicker label="Basic time picker" value={arrive} onChange={(newValue) => setArrive(newValue)}/>
-                    </LocalizationProvider>
-                </div>
-            </div>
+                        <div className='time-container'>
+                            <div className='date-picker time-item'>
+                                <div className='date-label'>Depart By:</div>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker orientation="landscape" value={depart} onChange={(newValue) => setDepart(newValue)}/>
+                                    <TimePicker label="Basic time picker" value={depart} onChange={(newValue) => setDepart(newValue)}/>
+                                </LocalizationProvider>
+                            </div>
+                            <div className='arrive-picker time-item'>
+                                <div className='date-label'>Arrive By:</div>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker orientation="landscape" value={arrive} onChange={(newValue) => setArrive(newValue)}/>
+                                    <TimePicker label="Basic time picker" value={arrive} onChange={(newValue) => setArrive(newValue)}/>
+                                </LocalizationProvider>
+                            </div>
+                        </div>
 
-            <div className='location-container'>
-                <div className='location-item'>
-                    <TextField id="filled-textarea" label="Pick-Up"
-                        multiline variant="filled" />
-                </div>
-                <div className='location-item'>
-                    <TextField id="filled-textarea" label="Destination"
-                        multiline variant="filled" />
-                </div>
-            </div>
+                        <div className='location-container'>
+                            <div className='location-item'>
+                                <div className='location-label'>Pick Up:</div>
+                                <TextField fullWidth id="outlined-textarea" placeholder="Pick Up"
+                                    multiline value={pickup} onChange={(event, newValue) => setPickUp(newValue)} />
+                            </div>
+                            <div className='location-item'>
+                                <div className='location-label'>Destination:</div>
+                                <TextField fullWidth id="outlined-textarea" placeholder="Destination"
+                                    multiline value={destination} onChange={(event, newValue) => setDestination(newValue)} />
+                            </div>
+                        </div>
 
-            <div className='price-container'>
-                <div className='price-range'>
-                    <div className='price'> 
-                        Price Range:
-                    </div>
-                    <div className='lower price'>
-                        ${range[0]}
-                    </div>
-                    <div className='price'>
-                        -
-                    </div>
-                    <div className='higher price'>
-                        ${range[1]}
-                    </div>
-                </div>
-                <Slider
-                    getAriaLabel={() => 'Temperature range'}
-                    value={range}
-                    onChange={handleChange}
-                    valueLabelDisplay="auto"
-                    sx={{width:'80%'}}
-                />
-            </div>
+                        <div className='price-container'>
+                            <div className='price-range'>
+                                <div className='range-label'> 
+                                    Price Range:
+                                </div>
+                                <div className='lower-price'>
+                                    <div className='dollar'>$</div>
+                                    <TextField className='bound' size='small' value={range[0]} onChange={(event, newValue) => setRange([newValue, range[1]])}/>
+                                </div>
+                                <div className='dash'>
+                                    -
+                                </div>
+                                <div className='higher-price'>
+                                    <div className='dollar'>$</div>
+                                    <TextField className = 'bound' size='small' value={range[1]} onChange={(event, newValue) => setRange([range[0], newValue])}/>
+                                </div>
+                            </div>
+                            <Slider
+                                value={range}
+                                fullWidth
+                                className='slider-object'
+                                onChange={(event, newValue) => setRange(newValue)}
+                                marks = {marks}
+                            />
+                        </div>
 
-            <div className='additional-container'>
-                
-                <div className='pax'>
-                    <img src={PeopleLogo} alt="Pax"/>
-                    <TextField id="filled-basic" label="pax" variant="filled" sx ={{width:'15%'}} />
-                </div>
-                <div className='comments'>
-                    <TextField
-                        id="filled-multiline-static"
-                        label="Additional Comments"
-                        multiline
-                        rows={4}
-                        variant="filled"
-                        sx = {{width:'80%'}}
-                    />
-                </div>
-            </div>
+                        <div className='additional-container'>
+                            
+                            <div className='pax'>
+                                <img src={PeopleLogo} alt="Pax"/>
+                                <TextField className='pax-form' value={people} placeholder="pax"
+                                onChange={(event, newValue) => setPeople(newValue)} id="filled-basic" />
+                            </div>
+                            <div className='comments'>
+                                <TextField
+                                    multiline
+                                    fullWidth
+                                    rows={4}
+                                    value = {comments}
+                                    placeholder="Additional Comments"
+                                    onChange={(event, newValue) => setComments(newValue)}
+                                />
+                            </div>
+                        </div>
 
-            <div className='button-container'>
-                <Button variant="contained">Create</Button>
-            </div>
-        </div>
+                        <div className='button-container'>
+                            <Button variant="contained">Create</Button>
+                        </div>
+                    </div>
+                </DialogContent>
+                <DialogActions>
+
+                </DialogActions>
+            </Dialog>
+        </>
     )
 }

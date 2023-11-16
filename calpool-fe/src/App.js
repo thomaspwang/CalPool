@@ -26,7 +26,7 @@ function App() {
           </Route>
           <Route path="/" element={<div>HELLO WORLD</div>}>
           </Route>
-          <Route path="/create_carpool" element={<CalpoolCreation/>}>
+          <Route path="/create_calpool" element={<CalpoolCreation/>}>
           </Route>
         </Routes>
       </Router>
