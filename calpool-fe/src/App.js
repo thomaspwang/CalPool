@@ -1,5 +1,6 @@
 import theme from './theme';    
 import './App.css';
+import CarpoolMangement from './pages/CarpoolManagement'; 
 import ViewCarpools from './pages/ViewCarpools.js';
 import CalpoolCreation from './pages/CalpoolCreation';
 import {
@@ -26,7 +27,9 @@ function App() {
           </Route>
           <Route path="/" element={<div>HELLO WORLD</div>}>
           </Route>
-          <Route path="/create_calpool" element={<CalpoolCreation/>}>
+          <Route path="/create_carpool" element={<CalpoolCreation/>}>
+          </Route>
+          <Route path="/carpool_management" element={<CarpoolMangement/>}>
           </Route>
         </Routes>
       </Router>

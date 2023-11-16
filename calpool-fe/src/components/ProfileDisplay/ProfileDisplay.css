@@ -1,0 +1,30 @@
+.profile-container {
+    max-width: 1080 px; 
+    padding-left: 15px; 
+    padding-right: 15px; 
+    margin: 0 auto;
+}
+
+
+.avatar {
+    width: 115px; 
+    height: 115px; 
+    border-radius: 50px; 
+
+}
+
+.home__img {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact__container {
+    grid-template-columns: 2fr 8fr; 
+    column-gap: 1.3rem; 
+    left: 220px; 
+
+}
+
+.contact_data {
+    text-align:left;
+}
