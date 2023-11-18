@@ -8,7 +8,6 @@ import dayjs from 'dayjs';
 import TextField from '@mui/material/TextField';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
-import PeopleLogo from '../people.png'
 import { DialogContent, DialogTitle } from "@mui/material";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -31,6 +30,13 @@ export default function CalpoolCreation() {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleChangeBound = (index, newValue) => {
+        const newRange = range.slice();
+        newRange[index] = newValue;
+        setRange(newRange);
+        console.log(range);
+    }
 
     const marks = [
         {
@@ -88,12 +94,12 @@ export default function CalpoolCreation() {
                             <div className='location-item'>
                                 <div className='location-label'>Pick Up:</div>
                                 <TextField fullWidth id="outlined-textarea" placeholder="Pick Up"
-                                    multiline value={pickup} onChange={(event, newValue) => setPickUp(newValue)} />
+                                    multiline value={pickup} onChange={event => setPickUp(event.target.value)} />
                             </div>
                             <div className='location-item'>
                                 <div className='location-label'>Destination:</div>
                                 <TextField fullWidth id="outlined-textarea" placeholder="Destination"
-                                    multiline value={destination} onChange={(event, newValue) => setDestination(newValue)} />
+                                    multiline onChange={event => setDestination(event.target.value)} />
                             </div>
                         </div>
 
@@ -104,14 +110,14 @@ export default function CalpoolCreation() {
                                 </div>
                                 <div className='lower-price'>
                                     <div className='dollar'>$</div>
-                                    <TextField className='bound' size='small' value={range[0]} onChange={(event, newValue) => setRange([newValue, range[1]])}/>
+                                    <TextField className='bound' size='small' value={range[0]} onChange={event => handleChangeBound(0, event.target.value)}/>
                                 </div>
                                 <div className='dash'>
                                     -
                                 </div>
                                 <div className='higher-price'>
                                     <div className='dollar'>$</div>
-                                    <TextField className = 'bound' size='small' value={range[1]} onChange={(event, newValue) => setRange([range[0], newValue])}/>
+                                    <TextField className = 'bound' size='small' value={range[1]} onChange={event => handleChangeBound(1, event.target.value)}/>
                                 </div>
                             </div>
                             <Slider
@@ -126,9 +132,9 @@ export default function CalpoolCreation() {
                         <div className='additional-container'>
                             
                             <div className='pax'>
-                                <img src={PeopleLogo} alt="Pax"/>
+                                <div className='pax-label'>Pax:</div>
                                 <TextField className='pax-form' value={people} placeholder="pax"
-                                onChange={(event, newValue) => setPeople(newValue)} id="filled-basic" />
+                                onChange={event => setPeople(event.target.value)} id="filled-basic" />
                             </div>
                             <div className='comments'>
                                 <TextField
@@ -137,7 +143,7 @@ export default function CalpoolCreation() {
                                     rows={4}
                                     value = {comments}
                                     placeholder="Additional Comments"
-                                    onChange={(event, newValue) => setComments(newValue)}
+                                    onChange={event => setComments(event.target.value)}
                                 />
                             </div>
                         </div>
