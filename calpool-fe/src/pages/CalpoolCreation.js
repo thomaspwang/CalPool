@@ -77,15 +77,15 @@ export default function CalpoolCreation() {
                             <div className='date-picker time-item'>
                                 <div className='date-label'>Depart By:</div>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker orientation="landscape" value={depart} onChange={(newValue) => setDepart(newValue)}/>
-                                    <TimePicker label="Basic time picker" value={depart} onChange={(newValue) => setDepart(newValue)}/>
+                                    <DatePicker label="Depart Date" orientation="landscape" value={depart} onChange={(newValue) => setDepart(newValue)}/>
+                                    <TimePicker label="Depart Time" value={depart} onChange={(newValue) => setDepart(newValue)}/>
                                 </LocalizationProvider>
                             </div>
                             <div className='arrive-picker time-item'>
                                 <div className='date-label'>Arrive By:</div>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker orientation="landscape" value={arrive} onChange={(newValue) => setArrive(newValue)}/>
-                                    <TimePicker label="Basic time picker" value={arrive} onChange={(newValue) => setArrive(newValue)}/>
+                                    <DatePicker label="Arrival Date" orientation="landscape" value={arrive} onChange={(newValue) => setArrive(newValue)}/>
+                                    <TimePicker label="Arrival Time" value={arrive} onChange={(newValue) => setArrive(newValue)}/>
                                 </LocalizationProvider>
                             </div>
                         </div>
@@ -93,12 +93,12 @@ export default function CalpoolCreation() {
                         <div className='location-container'>
                             <div className='location-item'>
                                 <div className='location-label'>Pick Up:</div>
-                                <TextField fullWidth id="outlined-textarea" placeholder="Pick Up"
+                                <TextField fullWidth id="outlined-textarea" label="Pick Up"
                                     multiline value={pickup} onChange={event => setPickUp(event.target.value)} />
                             </div>
                             <div className='location-item'>
                                 <div className='location-label'>Destination:</div>
-                                <TextField fullWidth id="outlined-textarea" placeholder="Destination"
+                                <TextField fullWidth id="outlined-textarea" label="Destination"
                                     multiline onChange={event => setDestination(event.target.value)} />
                             </div>
                         </div>
@@ -133,7 +133,7 @@ export default function CalpoolCreation() {
                             
                             <div className='pax'>
                                 <div className='pax-label'>Pax:</div>
-                                <TextField className='pax-form' value={people} placeholder="pax"
+                                <TextField className='pax-form' value={people} label="pax" 
                                 onChange={event => setPeople(event.target.value)} id="filled-basic" />
                             </div>
                             <div className='comments'>
@@ -142,7 +142,7 @@ export default function CalpoolCreation() {
                                     fullWidth
                                     rows={4}
                                     value = {comments}
-                                    placeholder="Additional Comments"
+                                    label="Additional Comments"
                                     onChange={event => setComments(event.target.value)}
                                 />
                             </div>
