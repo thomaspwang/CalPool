@@ -31,6 +31,17 @@ def nothing():
 @app.route('/ping')
 def pingpong():
     return "pong"
+@app.route("/update_profile", methods=["POST"])
+def update_profile():
+    user = User.objects().get(id=request.json['id'])
+    if not user:
+        return jsonify({"error: User not found"})
+    
+    else:
+        user.update(gender=request.json['gender'], major=request.json['major'], graduation_year=request.json['graduation_year'] ) 
+    user = User.objects().get(id=request.json['id'])
+    return jsonify(user)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
