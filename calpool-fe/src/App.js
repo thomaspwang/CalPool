@@ -1,7 +1,7 @@
 import theme from './theme';    
 import './App.css';
 import CarpoolMangement from './pages/CarpoolManagement'; 
-import ViewCarpools from './pages/ViewCarpools.js';
+import ViewCarpools from './pages/ViewCarpools/ViewCarpools';
 import CalpoolCreation from './pages/CalpoolCreation';
 import {
   BrowserRouter as Router,

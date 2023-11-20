@@ -1,4 +1,4 @@
-.titlebar__container {
+.titlebar-container {
     grid-template-columns: 2fr 8fr; 
     column-gap: 1.3rem; 
 }
@@ -13,8 +13,10 @@
 
 
 .left {
+    padding: 0vh;
+    width: 100%;
+    margin: 11px 25px;
     text-align: left;
-
 }
 
 
