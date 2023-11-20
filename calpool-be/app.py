@@ -64,11 +64,10 @@ def login():
         return jsonify({'error': str(e)}), 500
 
 #Get UserID
-@app.route('/get_id', methods=['GET'])
 def get_id():
     try:
         user_id = session.get('user_id', 'Not set')
-        return jsonify({'user_id': str(user_id)})
+        return str(user_id)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
