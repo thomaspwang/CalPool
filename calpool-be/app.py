@@ -41,11 +41,37 @@ def signup():
     hashedPassword = bcrypt.hashpw(password, bcrypt.gensalt())
     try:
         user = User(email=request.json['email'], password=hashedPassword, first_name=request.json['first_name'], last_name=request.json['last_name'], gender=request.json['gender'], phone_number=request.json['phone_number'], graduation_year=request.json['graduation_year'], major=request.json['major']).save()
+        session['user_id'] = str(user.id)
     except NotUniqueError:
         return jsonify({"error": "This email is already registered."}), 409
     except Exception as e:
         return jsonify({'error': str(e)})
     return jsonify({'user_id': str(user.id)})
+
+# Login
+@app.route('/login', methods=['POST'])
+def login():
+    try:
+        user = User.objects.get(email=request.json['email'])
+        if bcrypt.checkpw(request.json['password'].encode(), user.password.encode()):
+            session['user_id'] = str(user.id)
+            return jsonify({'user_id': str(user.id)})
+        else:
+            return jsonify({'error': 'Incorrect password'}), 401
+    except User.DoesNotExist:
+        return jsonify({'error': 'User not found'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+#Get UserID
+@app.route('/get_id', methods=['GET'])
+def get_id():
+    try:
+        user_id = session.get('user_id', 'Not set')
+        return jsonify({'user_id': str(user_id)})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
 # Get User
 @app.route('/get_user', methods=['GET'])
 def get_user():
@@ -69,4 +95,4 @@ def get_user():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
