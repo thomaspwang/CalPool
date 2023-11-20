@@ -36,7 +36,37 @@ export default function CalpoolCreation() {
         newRange[index] = newValue;
         setRange(newRange);
         console.log(range);
-    }
+    };
+
+    const createNewCarPool = async () => {
+        fetch('http://127.0.0.1:5000/create_trip', {
+            method: 'POST',
+            headers: {
+              Accept: 'application.json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                depart: depart.format('MM/DD/YY HH:mm'),
+                arrive: arrive.format('MM/DD/YY HH:mm'),
+                lowerBound: range[0],
+                upperBound: range[1],
+                pickup: pickup,
+                destination: destination,
+                people: people,
+                comments: comments,
+            }),
+        })
+        .then(response => {
+            response.json();
+        })
+        .then(data => {
+            console.log(data);
+            handleClose();
+        })
+        .catch(error => {
+            console.log('Error: ', error);
+        });
+    };
 
     const marks = [
         {
@@ -149,7 +179,7 @@ export default function CalpoolCreation() {
                         </div>
 
                         <div className='button-container'>
-                            <Button variant="contained">Create</Button>
+                            <Button variant="contained" onClick={createNewCarPool}>Create</Button>
                         </div>
                     </div>
                 </DialogContent>
