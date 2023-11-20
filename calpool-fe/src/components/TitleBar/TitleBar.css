@@ -1,0 +1,23 @@
+
+
+.texts {
+    display: flex;
+    flex-direction: row;
+    margin-left: 80px;
+    margin-right:80px;
+    justify-content: space-between;
+}
+
+
+.left {
+    padding: 0vh;
+    width: 100%;
+    margin: 11px 25px;
+}
+
+
+hr {
+    border-bottom: 5px solid #000000;
+    width: 90%;
+    left: 50px;
+}

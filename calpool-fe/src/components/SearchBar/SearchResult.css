@@ -1,0 +1,7 @@
+.search-result {
+    padding: 10px 20px;
+}
+
+.serach-result:hover {
+    background-color: #efefef;
+}

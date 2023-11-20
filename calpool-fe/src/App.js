@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import ViewCarpools from './pages/ViewCarpools.js';
+import ViewCarpools from './pages/ViewCarpools/ViewCarpools.js';
 import {
   BrowserRouter as Router,
   Route,
