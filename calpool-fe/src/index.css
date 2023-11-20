@@ -1,3 +1,42 @@
+:root {
+  --body-font: "Inter"
+  --h1-font-size:2.25rem;
+  --h2-font-size: 1.5rem; 
+  --h3-font-size: 1.25rem; 
+  --normal-font-size: 1rem
+  --small-font-size: 0.875rem;
+  --smaller-font-size: 0.813rem; 
+}
+
+.container {
+  max-width: 1080 px; 
+  padding-left: 15px; 
+  padding-right: 15px; 
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid; 
+}
+
+.section {
+  padding-top: 9rem; 
+  padding-bottom: 4rem; 
+}
+
+
+
+@media screen and (max-width: 1024px) {
+  
+  :root {--h1-font-size:1.75rem;
+    --h2-font-size: 1.25rem; 
+    --h3-font-size: 1rem; 
+    --normal-font-size: 0.9rem
+    --small-font-size: 0.81rem;
+    --smaller-font-size: 0.75rem; }
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +49,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+html {
+  scroll-behavior: smooth;
 }

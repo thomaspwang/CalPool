@@ -7,8 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 30px 50px;
-    position: relative;
+    margin: 25px auto;
   }
   
   /* On mouse-over, add a deeper shadow */
@@ -25,7 +24,6 @@
     width: 80%;
     grid-template-columns: repeat(2, 1fr);
     grid-auto-flow: row;
-    position: relative;
   }
 
   h4 {
@@ -41,7 +39,6 @@
     margin-top: 2%;
     width: 20%;
     padding-right: 20px;
-    position: relative;
   }
 
 

@@ -1,0 +1,153 @@
+.create-header {
+    padding: 20px;
+    text-align: center;
+    background-color: #EAEAEA;
+}
+
+.overall-container {
+    width: 100%;
+    text-align: center;
+}
+
+.time-container {
+    margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.time-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.date-label {
+    text-align: left;
+    width: 100px;
+}
+
+.date-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.date-inner {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.pickup {
+    flex: 5;
+    justify-content: right;
+}
+
+.destination {
+    flex: 5;
+    justify-content: left;
+}
+
+.to {
+    flex: 1;
+    justify-content: center;
+}
+
+.location-container {
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.location-item {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.location-label {
+    text-align: left;
+    width: 115px;
+}
+
+
+.price-range {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.price-container {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.range-label {
+    margin-right: 20px;
+}
+
+.lower-price {
+    margin-right: 10px;
+    align-items: center;
+    display: flex;
+}
+
+.higher-price {
+    margin-left: 10px;
+    align-items: center;
+    display: flex;
+}
+
+.dollar {
+    margin-right: 5px;
+}
+
+.bound {
+    width:55px;
+}
+
+.slider-object {
+    margin-top: 20px;
+}
+
+
+
+.additional-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pax {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.comments {
+    flex: 6;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.pax-form {
+    width: 55px;
+}
+
+
+.button-container {
+    margin-top: 30px;
+}
+
+

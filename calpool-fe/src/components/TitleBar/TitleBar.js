@@ -5,7 +5,7 @@ import FilterButton from "./FilterButton";
 
 function TitleBar({BarName}) {
     return (
-        <div className = "titlebar__container">
+        <div className = "titlebar-container">
             <div className = "texts">
             
 
