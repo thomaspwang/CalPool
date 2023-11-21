@@ -46,9 +46,9 @@ const Login = () => {
         </Link>
       </div>
       <form onSubmit={handleSubmit} className="form">
-      <TextInput type='text' error={form.email.error} placeholder="Email" name='email' onChange={(event) => handleFormChange(event, setForm)} value={form.email.value}/>
-      <TextInput type='password' error={form.password.error} placeholder="Password" name='password' onChange={(event) => handleFormChange(event, setForm)} value={form.password.value}/>
-      <Button type='submit' color='primary' loading={false}>Sign In</Button>
+        <TextInput type='text' error={form.email.error} placeholder="Email" name='email' onChange={(event) => handleFormChange(event, setForm)} value={form.email.value}/>
+        <TextInput type='password' error={form.password.error} placeholder="Password" name='password' onChange={(event) => handleFormChange(event, setForm)} value={form.password.value}/>
+        <Button type='submit' color='primary' loading={false}>Sign In</Button>
       </form>
       <Link
           href=""
