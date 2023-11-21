@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, TextInput } from "../../components";
 import { Link } from "@mui/material";
+import { validateFormSignUp, handleFormChange } from "../../utils/utils";
 import "./SignUp.css";
 
 const SignUp = () => {
@@ -12,63 +13,18 @@ const SignUp = () => {
   });
 
   const [showPass, setShowPass] = useState(false);
-
-  const handleFormChange = (event) => {
-    const { name, value } = event.target;
-    setForm(prev => ({...prev, [name]: {value: value, error: ""}}))
-  }
   
   const handleSubmit = (event) => {
     event.preventDefault();
-    const isFormValid = validateForm()
+    const isFormValid = validateFormSignUp(form, setForm)
     if (isFormValid) {
       //TODO
     }
   }
 
-  const validateForm = () => {
-    let isValid = true;
-    const updatedState = {
-      ...form,
-      firstName: { ...form.firstName, error: "" },
-      lastName: { ...form.lastName, error: "" },
-      email: { ...form.email, error: "" },
-      password: { ...form.password, error: "" },
-    };
-  
-    if (!updatedState.firstName.value.trim()) {
-      updatedState.firstName.error = 'First name is required';
-      isValid = false;
-    }
-  
-    if (!updatedState.lastName.value.trim()) {
-      updatedState.lastName.error = 'Last name is required';
-      isValid = false;
-    }
-  
-    function validateEmail(email) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email);
-    }
-  
-    if (!validateEmail(updatedState.email.value)) {
-      updatedState.email.error = 'Please enter a valid email address';
-      isValid = false;
-    }
-  
-    if (updatedState.password.value.length < 7) {
-      updatedState.password.error = 'Password must be at least 7 characters long';
-      isValid = false;
-    }
-    !isValid && setForm(updatedState);
-  
-    return isValid;
-  };
-
   const toggleShow = () => {
     setShowPass(!showPass)
   }
-
 
   return (
     <div className="container">
@@ -87,8 +43,8 @@ const SignUp = () => {
       </div>
       <form onSubmit={handleSubmit} className="form">
       <div className="name-container">
-        <TextInput type='text' error={form.firstName.error} placeholder="First name" name='firstName' onChange={handleFormChange} value={form.firstName.value}/>
-        <TextInput type='text' error={form.lastName.error} placeholder="Last name" name='lastName' onChange={handleFormChange} value={form.lastName.value}/>
+        <TextInput type='text' error={form.firstName.error} placeholder="First name" name='firstName' onChange={(event) => handleFormChange(event, setForm)} value={form.firstName.value}/>
+        <TextInput type='text' error={form.lastName.error} placeholder="Last name" name='lastName' onChange={(event) => handleFormChange(event, setForm)} value={form.lastName.value}/>
       </div>
       <TextInput type='text' error={form.email.error} placeholder="Email" name='email' onChange={handleFormChange} value={form.email.value}/>
       <div className="password">

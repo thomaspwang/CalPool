@@ -1,7 +1,7 @@
 import React from "react";
 import LoadingButton from "@mui/lab/LoadingButton";
 
-const Button = ({ children, color, onClick, loading, type }) => {
+const Button = ({ children, color, onClick, loading, type, disabled  }) => {
   return (
     <LoadingButton
       type={type}
@@ -12,6 +12,7 @@ const Button = ({ children, color, onClick, loading, type }) => {
       className="LoadingButton"
       sx= {{ fontWeight: '600'}}
       disableRipple
+      disabled={disabled}
     >
       {children}
     </LoadingButton>
