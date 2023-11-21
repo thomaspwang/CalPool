@@ -3,18 +3,30 @@ import { Button, TextInput } from "../../components";
 import { Link } from "@mui/material";
 import "./Login.css";
 import { handleFormChange, validateFormLogin } from "../../utils/utils";
+import { useNavigate } from "react-router-dom";
+import loginApi from "../../api/loginApi";
 
 const Login = () => {
   const [form, setForm] = useState({
       email: { value: "", error: "" },
       password: { value: "", error: "" },
   });
+  const navigate = useNavigate()
   
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const isFormValid = validateFormLogin(form, setForm);
     if (isFormValid) {
-      //TODO
+      const loginResult = await loginApi(form.email.value, form.password.value)
+      if (loginResult.error === 'User not found') {
+        setForm({...form, email: {...form.email, error: 'User not found'}})
+      }
+      else if (loginResult.error === 'Incorrect password') {
+        setForm({...form, password: {...form.password, error: 'Incorrect password'}})
+      }
+      else {
+        navigate('/')
+      }
     }
   }
 
@@ -34,9 +46,9 @@ const Login = () => {
         </Link>
       </div>
       <form onSubmit={handleSubmit} className="form">
-      <TextInput type='text' error={form.email.error} placeholder="Email" name='email' onChange={(event) => handleFormChange(event, setForm)} value={form.email.value}/>
-      <TextInput type='password' error={form.password.error} placeholder="Password" name='password' onChange={(event) => handleFormChange(event, setForm)} value={form.password.value}/>
-      <Button type='submit' color='primary' loading={false}>Sign In</Button>
+        <TextInput type='text' error={form.email.error} placeholder="Email" name='email' onChange={(event) => handleFormChange(event, setForm)} value={form.email.value}/>
+        <TextInput type='password' error={form.password.error} placeholder="Password" name='password' onChange={(event) => handleFormChange(event, setForm)} value={form.password.value}/>
+        <Button type='submit' color='primary' loading={false}>Sign In</Button>
       </form>
       <Link
           href=""
