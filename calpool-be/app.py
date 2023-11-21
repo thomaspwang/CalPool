@@ -40,7 +40,7 @@ def update_profile():
         return jsonify({"error: User not found"})
     
     else:
-        user.update(gender=request.json['gender'], major=request.json['major'], graduation_year=request.json['graduation_year'] ) 
+        user.update(first_name=request.json["first name"], last_name=request.json["last name"], gender=request.json['gender'], graduation_year=request.json['graduation_year'] ) 
     user = User.objects().get(id=request.json['id'])
     return jsonify(user)
 
