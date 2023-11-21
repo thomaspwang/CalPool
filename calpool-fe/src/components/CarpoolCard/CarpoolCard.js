@@ -5,14 +5,14 @@ import './CarpoolCard.css';
 
 function CarpoolCard({creator, date, puTime, puLoc, eta, dest}) {
     return (
-        <div class = "card">
+        <div className = "card">
             <div className="parent">
                 <div className = "children" >
                     <span className="circle"></span>
                 </div>
                 <h4><b className = "creator">{creator}</b></h4>
             </div>
-            <div class="vertical-line"></div>
+            <div className="vertical-line"></div>
             <div className = "grid-container">
                 <p className = "dest"> Destination: {dest} </p> 
                 <p className = "date"> Date: {date} </p>

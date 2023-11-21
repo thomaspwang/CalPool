@@ -1,0 +1,30 @@
+.titlebar-container {
+    grid-template-columns: 2fr 8fr; 
+    column-gap: 1.3rem; 
+}
+
+.texts {
+    display: flex;
+    flex-direction: row;
+    margin-left: 80px;
+    margin-right:80px;
+    justify-content: space-between;
+}
+
+
+.left {
+    padding: 0vh;
+    width: 100%;
+    margin: 11px 25px;
+    text-align: left;
+}
+
+
+hr {
+    color: black;
+    background-color: black;
+    height: 4px;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+

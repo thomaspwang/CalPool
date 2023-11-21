@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 .View-header {
     background-color: #000000;
     min-height: 60vh; /* Adjust the minimum height as needed */
@@ -8,4 +9,36 @@
     font-size: calc(40px + 2vmin); /* Adjust the font size as needed */
     color: white;
     justify-content: center;
+=======
+  .ViewCarpools {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .search-bar-container {
+    padding-top: 3vh;
+    width: 65%;
+    margin: 11px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    min-width: 300px;
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .line {
+    border-bottom: 5px solid #000000;
+    width: 90%;
+    left: 50px;
+  }
+
+  .available-trips-header {
+    padding: 0vh;
+    width: 100%;
+    margin: auto 50px;
+>>>>>>> 8b84885ef1cd3df8e1e8593abfee30a80796bafc
   }

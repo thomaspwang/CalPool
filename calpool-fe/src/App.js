@@ -1,6 +1,8 @@
 import theme from './theme';    
 import './App.css';
-import ViewCarpools from './pages/ViewCarpools/ViewCarpools.js';
+import CarpoolMangement from './pages/CarpoolManagement'; 
+import ViewCarpools from './pages/ViewCarpools/ViewCarpools';
+import CalpoolCreation from './pages/CalpoolCreation';
 import {
   BrowserRouter as Router,
   Route,
@@ -32,6 +34,10 @@ function App() {
           <Route path="/view_carpools" element={<ViewCarpools/>}>
           </Route>
           <Route path="/" element={<div>HELLO WORLD</div>}>
+          </Route>
+          <Route path="/create_carpool" element={<CalpoolCreation/>}>
+          </Route>
+          <Route path="/carpool_management" element={<CarpoolMangement/>}>
           </Route>
         </Routes>
       </Router>
