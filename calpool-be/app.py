@@ -54,13 +54,13 @@ def create_trip():
         end_location = data['destination']
         start_time = data['depart']
         end_time = data['arrive']
-        lower_bound = data['lowerBound']
-        upper_bound = data['upperBound']
+        lower_bound = data['lower_bound']
+        upper_bound = data['upper_bound']
         max_people = data['people']
         comments = data['comments']
 
         # Hardcoded
-        current_user = User.objects(email="fake@gmail.com").first()
+        current_user = User.objects(email="fake@gmail.com").first() # to change
         # current_user = User.objects(id=get_id()).first()
 
         new_trip = Trip(
@@ -72,20 +72,22 @@ def create_trip():
             upper_bound=upper_bound,
             max_people=max_people,
             comments=comments,
-            owner=current_user)
+            owner=current_user,
+            participants=[current_user])
         
-        # add_user_to_carpool(new_trip) 
-
         new_trip.save()
+        add_carpool_to_user(new_trip) 
+
         return jsonify({'trip_id': str(new_trip.id)})
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# Add user to carpool object
+# Add carpool to user object
 def add_carpool_to_user(trip):
-    current_user = User.objects(id=get_id()).first()
-    current_user.trips_participating.append(trip)
+    # current_user = User.objects(id=get_id()).first()
+    current_user = User.objects(id="655be59f47dfea0dc232cfe0").first()
+    current_user.trips_participating.append(trip) # to change
     current_user.save()
 
 # Signup

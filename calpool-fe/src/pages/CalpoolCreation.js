@@ -48,8 +48,8 @@ export default function CalpoolCreation() {
             body: JSON.stringify({
                 depart: depart.format('MM/DD/YY HH:mm'),
                 arrive: arrive.format('MM/DD/YY HH:mm'),
-                lowerBound: range[0],
-                upperBound: range[1],
+                lower_bound: range[0],
+                upper_bound: range[1],
                 pickup: pickup,
                 destination: destination,
                 people: people,
