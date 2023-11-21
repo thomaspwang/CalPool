@@ -1,15 +1,4 @@
 
-<<<<<<< HEAD
-.View-header {
-    background-color: #000000;
-    min-height: 60vh; /* Adjust the minimum height as needed */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: calc(40px + 2vmin); /* Adjust the font size as needed */
-    color: white;
-    justify-content: center;
-=======
   .ViewCarpools {
     height: 100vh;
     width: 100vw;
@@ -40,5 +29,4 @@
     padding: 0vh;
     width: 100%;
     margin: auto 50px;
->>>>>>> 8b84885ef1cd3df8e1e8593abfee30a80796bafc
   }

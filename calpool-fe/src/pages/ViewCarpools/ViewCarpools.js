@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import './ViewCarpools.css';
-import { CarpoolCard } from "../../components";
-
-function ViewCarpools() {
-    return (
-        <div className = "ViewCarpools">
-            <header className = "View-header">
-                View Carpools
-            </header>
-            <div>
-            <CarpoolCard dest = "SFO" creator="creator" date="10/10/23 - 10/10/23"/>
-        </div>
-=======
 import React, { useEffect, useState } from "react";
 import './ViewCarpools.css';
 import CarpoolCard from "../../components/CarpoolCard/CarpoolCard"
@@ -36,7 +21,6 @@ function ViewCarpools() {
             <CarpoolCard dest = "SFO" creator="creator" date="10/10/23 - 10/10/23"/>
             <CarpoolCard dest = "SFO" creator="creator" date="10/10/23 - 10/10/23"/>
             </div>
->>>>>>> 8b84885ef1cd3df8e1e8593abfee30a80796bafc
         </div>  
     );
 }
