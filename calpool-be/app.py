@@ -47,11 +47,9 @@ def create_carpool():
     max_people = data['people']
     comments = data['comments']
 
-    print(start_time)
-    print(end_time)
-
     # Hardcoded
     current_user = User.objects(email="fake@gmail.com").first()
+    # current_user = User.objects(id=get_id()).first()
 
     new_trip = Trip(
         start_location=start_location,
