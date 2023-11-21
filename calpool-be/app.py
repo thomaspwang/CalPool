@@ -32,5 +32,17 @@ def nothing():
 def pingpong():
     return "pong"
 
+@app.route('/get_all_calpools', methods=['GET'])
+# get all available calpools that aren’t created by you
+# or you aren’t in already (creator != current_user_id)
+def get_all_calpools():
+    notYourCarpools = Trip.query.filter(Trip._id != request.json["owner"]).all()
+    carSpots = Trip.query.filter(Trip.max_people < len(request.json["particpants"])).all()
+    if not (carSpots and notYourCarpools):
+        return jsonify({"message": "No carpools available"})
+    else:
+        return jsonify(notYourCarpools)
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=8000, debug=True)
