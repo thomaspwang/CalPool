@@ -3,18 +3,30 @@ import { Button, TextInput } from "../../components";
 import { Link } from "@mui/material";
 import "./Login.css";
 import { handleFormChange, validateFormLogin } from "../../utils/utils";
+import { useNavigate } from "react-router-dom";
+import loginApi from "../../api/loginApi";
 
 const Login = () => {
   const [form, setForm] = useState({
       email: { value: "", error: "" },
       password: { value: "", error: "" },
   });
+  const navigate = useNavigate()
   
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const isFormValid = validateFormLogin(form, setForm);
     if (isFormValid) {
-      //TODO
+      const loginResult = await loginApi(form.email.value, form.password.value)
+      if (loginResult.error === 'User not found') {
+        setForm({...form, email: {...form.email, error: 'User not found'}})
+      }
+      else if (loginResult.error === 'Incorrect password') {
+        setForm({...form, password: {...form.password, error: 'Incorrect password'}})
+      }
+      else {
+        navigate('/')
+      }
     }
   }
 
