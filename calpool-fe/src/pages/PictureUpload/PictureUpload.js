@@ -57,7 +57,7 @@ function ImageUpload() {
       <h1 className="header">Welcome, {}</h1>
       <form className="form" onSubmit={handleSubmit}>
         <div
-          className={`circle ${isDragOver ? "drag-over" : ""}`}
+          className={`circle-signup ${isDragOver ? "drag-over" : ""}`}
           onClick={handleClick}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
