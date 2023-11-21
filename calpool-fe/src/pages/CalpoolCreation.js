@@ -2,13 +2,13 @@ import { useState } from "react";
 import './CalpoolCreation.css';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker, StaticDatePicker } from '@mui/x-date-pickers';
+import { DatePicker } from '@mui/x-date-pickers';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import dayjs from 'dayjs';
 import TextField from '@mui/material/TextField';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
-import { DialogContent, DialogTitle } from "@mui/material";
+import { DialogContent } from "@mui/material";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 
@@ -36,7 +36,37 @@ export default function CalpoolCreation() {
         newRange[index] = newValue;
         setRange(newRange);
         console.log(range);
-    }
+    };
+
+    const createNewCarPool = async () => {
+        fetch('http://127.0.0.1:5001/create_trip', {
+            method: 'POST',
+            headers: {
+              Accept: 'application.json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                depart: depart.format('MM/DD/YY HH:mm'),
+                arrive: arrive.format('MM/DD/YY HH:mm'),
+                lower_bound: range[0],
+                upper_bound: range[1],
+                pickup: pickup,
+                destination: destination,
+                people: people,
+                comments: comments,
+            }),
+        })
+        .then(response => {
+            response.json();
+        })
+        .then(data => {
+            console.log(data);
+            handleClose();
+        })
+        .catch(error => {
+            console.log('Error: ', error);
+        });
+    };
 
     const marks = [
         {
@@ -149,7 +179,7 @@ export default function CalpoolCreation() {
                         </div>
 
                         <div className='button-container'>
-                            <Button variant="contained">Create</Button>
+                            <Button variant="contained" onClick={createNewCarPool}>Create</Button>
                         </div>
                     </div>
                 </DialogContent>
