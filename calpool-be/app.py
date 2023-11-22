@@ -93,6 +93,9 @@ def add_carpool_to_user(trip):
 # Signup
 @app.route('/signup', methods=['POST'])
 def signup():
+    required_fields = ['email', 'password', 'first_name', 'last_name', 'gender', 'phone_number', 'graduation_year', 'major']
+    if not all(field in request.json for field in required_fields):
+        return jsonify({'error': 'Missing required fields'}), 400
     password = request.json['password'].encode()
     hashedPassword = bcrypt.hashpw(password, bcrypt.gensalt())
     try:
