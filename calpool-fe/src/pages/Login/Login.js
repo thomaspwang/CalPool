@@ -31,7 +31,7 @@ const Login = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container fade-in">
       <h1 className="header">CalPool</h1>
       <div className="header-container">
         <h1 className="sign-in-text">Sign In</h1>

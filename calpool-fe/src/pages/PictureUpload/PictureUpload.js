@@ -1,21 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../../components";
 import { Link } from "@mui/material";
+import { validateFormSignUp, validateFormUserInfo } from "../../utils/utils";
+import signupApi from '../../api/signupApi'
 import './PictureUpload.css'
+import { useNavigate } from "react-router-dom";
 
-function ImageUpload() {
+function PictureUpload({ form, setForm, setPage }) {
   const [image, setImage] = useState(null);
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = React.createRef();
+  const navigate = useNavigate()
 
   const handleChange = (event) => {
     const file = event.target.files[0];
     handleFile(file);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // TODO
+    const isFormValid = validateFormSignUp(form, setForm) && validateFormUserInfo(form, setForm)
+    if (isFormValid) {
+      const signupResult = await signupApi(form.email.value, form.password.value, form.firstName.value, form.lastName.value,form.gender.value, form.number.value, form.grad_year.value, form.major.value)
+      if (signupResult.error === 'This email is already registered.') {
+        setPage('signup')
+        setForm({...form, email: {...form.email, error: 'This email is already registered.'}})
+      }
+      else if (signupResult.error === 'Missing required fields') {
+        setPage('signup')
+      }
+      else {
+        navigate('/')
+      }
+    }
+    else {
+      setPage('signup')
+    }
   }
 
   const handleClick = () => {
@@ -52,9 +72,15 @@ function ImageUpload() {
 
   const disabled = !image ? true : false;
 
+  useEffect(() => {
+    if (!form.firstName.value || !form.number.value) {
+      setPage('signup')
+    }
+  })
+
   return (
-    <div className="container">
-      <h1 className="header">Welcome, {}</h1>
+    <div className="container slide-in-right">
+      <h1 className="header-pic">Welcome, {form.firstName.value}</h1>
       <form className="form" onSubmit={handleSubmit}>
         <div
           className={`circle-signup ${isDragOver ? "drag-over" : ""}`}
@@ -71,10 +97,12 @@ function ImageUpload() {
             style={{ display: "none" }}
             accept="image/*"
           />
+            {!image && <span className="circle-text">Upload Image</span>}
         </div>
         <Button type='submit' color='primary' loading={false} disabled={disabled}>Next</Button>
         <Link
           href=""
+          onClick={handleSubmit}
           underline="hover"
           variant="body2"
           color="secondary"
@@ -87,4 +115,4 @@ function ImageUpload() {
   );
 }
 
-export default ImageUpload;
+export default PictureUpload;
