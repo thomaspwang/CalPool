@@ -1,14 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { TextInput, Button, RadiosGroup, Dropdown } from '../../components'
 import { handleFormChange, validateFormUserInfo } from '../../utils/utils'
+import './InputUserInfo.css'
 
-const InputUserInfo = () => {
-    const [form, setForm] = useState({
-        number: { value: "", error: "" },
-        major: { value: "", error: "" },
-        gender: { value: "", error: "" },
-        grad_year: { value: 2023, error: "" },
-    });
+const InputUserInfo = ({ form, setForm, setPage }) => {
     const genderRadioOptions = ['Female', 'Male', 'Other']
     const gradYearOptions = Array.from({ length: 5 }, (_, i) => new Date().getFullYear() + i);
 
@@ -17,14 +12,19 @@ const InputUserInfo = () => {
       event.preventDefault();
       const isFormValid = validateFormUserInfo(form, setForm);
       if (isFormValid) {
-        //TODO
-        console.log(form)
+        setPage('picture')
       }
     }
+
+    useEffect(() => {
+      if (!form.firstName.value) {
+        setPage('signup')
+      }
+    })
     
   return (
-    <div className="container">
-      <h1 className="header">Welcome, </h1>
+    <div className="container slide-in-right">
+      <h1 className="header-info">Welcome, {form.firstName.value}</h1>
       <form onSubmit={handleSubmit} className="form">
         <TextInput type='text' error={form.number.error} placeholder="Mobile Phone" name='number' onChange={(event) => handleFormChange(event, setForm)} value={form.number.value}/>
         <TextInput type='text' error={form.major.error} placeholder="Major" name='major' onChange={(event) => handleFormChange(event, setForm)} value={form.major.value}/>
