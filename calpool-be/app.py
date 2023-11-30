@@ -34,6 +34,7 @@ def nothing():
 @app.route('/ping')
 def pingpong():
     return "pong"
+
 @app.route("/update_profile", methods=["POST"])
 def update_profile():
     user = User.objects().get(id=request.json['id'])
@@ -61,7 +62,8 @@ def create_trip():
 
         # Hardcoded
         current_user = User.objects(email="fake@gmail.com").first() # to change
-        # current_user = User.objects(id=get_id()).first()
+        # id_object = get_id()
+        # current_user = User.objects(id=id_object['user_id']).first()
 
         new_trip = Trip(
             start_location=start_location,
@@ -85,7 +87,8 @@ def create_trip():
 
 # Add carpool to user object
 def add_carpool_to_user(trip):
-    # current_user = User.objects(id=get_id()).first()
+    # id_object = get_id()
+    # current_user = User.objects(id=id_object['user_id']).first()
     current_user = User.objects(id="655be59f47dfea0dc232cfe0").first()
     current_user.trips_participating.append(trip) # to change
     current_user.save()
@@ -114,7 +117,7 @@ def login():
         user = User.objects.get(email=request.json['email'])
         if bcrypt.checkpw(request.json['password'].encode(), user.password.encode()):
             session['user_id'] = str(user.id)
-            return jsonify({'user_id': str(user.id)})
+            return jsonify({'user_id': session['user_id']})
         else:
             return jsonify({'error': 'Incorrect password'}), 401
     except User.DoesNotExist:
@@ -123,10 +126,11 @@ def login():
         return jsonify({'error': str(e)}), 500
 
 #Get UserID
+@app.route('/get_id', methods=['GET'])
 def get_id():
     try:
         user_id = session.get('user_id', 'Not set')
-        return str(user_id)
+        return jsonify({'user_id': str(user_id)})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     

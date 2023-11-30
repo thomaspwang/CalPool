@@ -5,6 +5,7 @@ import "./Login.css";
 import { handleFormChange, validateFormLogin } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import loginApi from "../../api/loginApi";
+import userContextAPI from "../../api/userContextAPI";
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -25,7 +26,9 @@ const Login = () => {
         setForm({...form, password: {...form.password, error: 'Incorrect password'}})
       }
       else {
-        navigate('/')
+        console.log(loginResult);
+        const userID = await userContextAPI();
+        console.log(userID.user_id);
       }
     }
   }

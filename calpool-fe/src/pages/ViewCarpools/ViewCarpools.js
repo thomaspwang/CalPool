@@ -14,6 +14,8 @@ import Slider from '@mui/material/Slider';
 import { DialogContent } from "@mui/material";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
+import userContextAPI from '../../api/userContextAPI.js';
+import { useNavigate } from 'react-router-dom';
 
 function ViewCarpools() {
     const [results, setResults] = useState([]);
@@ -25,7 +27,19 @@ function ViewCarpools() {
     const [destination, setDestination] = useState('');
     const [people, setPeople] = useState();
     const [comments, setComments] = useState('');
+    const navigate = useNavigate();
     
+    useEffect(() => {
+        verifyUserID();
+    });
+
+    const verifyUserID = async () => {
+        const userID = await userContextAPI();
+        console.log(userID.user_id);
+        if (userID.user_id === 'Not set') {
+            navigate('/login');
+        }
+    };
 
     const handleClickOpen = () => {
         setOpen(true);
