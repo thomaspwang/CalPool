@@ -36,14 +36,27 @@ def pingpong():
     return "pong"
 @app.route("/update_profile", methods=["POST"])
 def update_profile():
-    user = User.objects().get(id=request.json['id'])
+    user_data = request.json
+    user_id = user_data.get('id')
+
+    user = User.objects(id=user_id).first()
     if not user:
-        return jsonify({"error: User not found"})
-    
-    else:
-        user.update(first_name=request.json["first name"], last_name=request.json["last name"], gender=request.json['gender'], graduation_year=request.json['graduation_year'] ) 
-    user = User.objects().get(id=request.json['id'])
-    return jsonify(user)
+        return jsonify({"error": "User not found"}), 404
+
+   
+    update_result = User.objects(id=user_id).update_one(
+        set__first_name=user_data.get("first_name"),
+        set__last_name=user_data.get("last_name"),
+        set__gender=user_data.get('gender'),
+        set__graduation_year=user_data.get('graduation_year')
+      
+    )
+
+    if update_result == 0:
+        return jsonify({"error": "No updates made"}), 400
+
+    return jsonify({"message": "Profile updated successfully"}), 200
+
 
 
 @app.route('/create_trip', methods=['POST'])
