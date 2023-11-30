@@ -8,6 +8,7 @@ const loginApi = async (email, password) => {
       email: email,
       password: password,
     }),
+    credentials: 'include',
   });
   const resultStatus = await result.json()
   return resultStatus

@@ -4,6 +4,7 @@ const userContextAPI = async () => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: 'include',
     });
     const resultStatus = await result.json();
     return resultStatus;

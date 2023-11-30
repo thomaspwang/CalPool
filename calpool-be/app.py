@@ -16,14 +16,15 @@ app.secret_key = 'plextech'
 
 
 CORS(app) # To prevent CORS errors during local development
-cors = CORS(app, resource={
+cors = CORS(app, supports_credentials=True, resource={
     r"/*":{
         "origins":"*"
     }
 })
 
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+app.config['SESSION_COOKIE_SECURE'] = True
 app.config["MONGODB_HOST"] = "mongodb+srv://username:Password1234@calpool.rvzxgdh.mongodb.net/?retryWrites=true&w=majority"
-
 db.init_app(app)
 
 # Routes
@@ -129,7 +130,7 @@ def login():
 @app.route('/get_id', methods=['GET'])
 def get_id():
     try:
-        user_id = session.get('user_id', 'Not set')
+        user_id = session.get('user_id')
         return jsonify({'user_id': str(user_id)})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
