@@ -1,0 +1,13 @@
+.label {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+}
+
+.radio.MuiRadio-root {
+    background-color: #D9D9D9;
+}
