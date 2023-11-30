@@ -10,4 +10,4 @@ class User(db.Document):
     graduation_year = db.IntField(required=True)
     major = db.StringField(required=True)
     trips_owned = db.ListField(db.ReferenceField('Trip'))
-    trips_participating = db.ListField(db.ReferenceField('Trip'))
+    trips_participating = db.ListField(db.ReferenceField('Trip'), dbre=True)

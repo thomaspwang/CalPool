@@ -32,5 +32,51 @@ def nothing():
 def pingpong():
     return "pong"
 
+# Carpool management
+@app.route('/retrieve_upcoming', methods=['POST'])
+def retrive_upcoming ():
+    user = User.objects.get(id=request.json['id'])
+    list = user.trips_owned + user.trips_participating
+
+    
+    if not user: 
+        return jsonify({'error': 'User not found'})
+    else: 
+        return jsonify(list)
+    
+@app.route('/retrieve_past', methods=['POST'])
+def retrive_past ():
+    user = User.objects.get(id=request.json['id'])
+    list = user.trips_owned + user.trips_participating
+    
+    if not user: 
+        return jsonify({'error': 'User not found'})
+    else: 
+        return jsonify(list)
+
+@app.route('/get_user_info', methods=['POST']) 
+def get_user_info (): 
+    print(request.json)
+    user = User.objects.get(id=request.json['id'])
+    print(jsonify(user))
+    print(user.first_name)
+
+    if not user: 
+        return jsonify({'error': 'User not found'})
+    else: 
+        return jsonify(user)
+    
+# @app.route('/get_up_coming', methods=['GET']) 
+# def get_
+    
+    
+
+
+
+    
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=8000, debug=True)
+
+
