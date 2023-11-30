@@ -16,6 +16,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 
 function ViewCarpools() {
+    const [carpools, setCarpools] = useState({});
     const [results, setResults] = useState([]);
     const [open, setOpen] = useState(false);
     const [depart, setDepart] = useState(dayjs());
@@ -93,23 +94,48 @@ function ViewCarpools() {
         },
     ]
 
+    useEffect(() => {
+        fetch('http://127.0.0.1:5001/get_all_calpools', {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            setCarpools(data);
+        })
+        .catch(error => {
+            console.log('Error: ', error);
+        }); 
+    }, []);
+
+
+
     return (
         <>
-            <div className = "ViewCarpools">
-                <div className = "search-bar-container">
-                    <SearchBar setResults={setResults}/>
-                    <Button variant="contained" className="new-carpool-btn" onClick={handleClickOpen}>New Carpool</Button>
-                </div>
-
-                <TitleBar BarName = "Available Trips"/>
-                <div>
-                <CarpoolCard dest = "SFO" creator="creator" date="10/10/23 - 10/10/23"/>
-                <CarpoolCard dest = "SFO" creator="creator" date="10/10/23 - 10/10/23"/>
-                <CarpoolCard dest = "SFO" creator="creator" date="10/10/23 - 10/10/23"/>
-                <CarpoolCard dest = "SFO" creator="creator" date="10/10/23 - 10/10/23"/>
-                <CarpoolCard dest = "SFO" creator="creator" date="10/10/23 - 10/10/23"/>
-                </div>
-            </div>  
+        <div className = "ViewCarpools">
+            <div className = "search-bar-container">
+                <SearchBar setResults={setResults}/>
+                <Button variant="contained" className="new-carpool-btn" onClick={handleClickOpen}>New Carpool</Button>
+            </div>
+            <TitleBar BarName = "Available Trips"/>
+            <div>
+            {Object.entries(carpools).map(([name, carpool]) =>
+        <CarpoolCard 
+        dest={carpool.end_location} 
+        creator={name} 
+        date={(new Date(carpool.start_time.$date)).toLocaleString().split(",")[0]} 
+        puTime ={(new Date(carpool.start_time.$date)).toLocaleString().split(",")[1]} 
+        puLoc = {carpool.start_location}
+        eta = {(new Date(carpool.end_time.$date)).toLocaleString().split(",")[1]}
+        />
+    )}
+            </div>
+        </div>  
+         
 
             <Dialog open={open} onClose={handleClose}>
                 <h1 className='create-header'>Create New Calpool</h1>

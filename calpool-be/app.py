@@ -165,5 +165,23 @@ def get_user():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/get_all_calpools', methods=['GET'])
+# get all available calpools that aren’t created by you
+# or you aren’t in already (creator != current_user_id)
+def get_all_calpools(): 
+    # all_carpools = Trip.objects(owner__ne = get_id())
+    all_carpools = Trip.objects(owner__ne = "655be59f47dfea0dc232cfe0")
+    carpool_dict = {}
+    for carpool in all_carpools:
+        if carpool.max_people > len(carpool.participants):
+            user = User.objects.get(id=carpool.owner.id)
+            user_name = user.first_name + " " + user.last_name
+            carpool_dict[user_name] = carpool
+    if not carpool_dict:
+        return jsonify({"message": "No carpools available"})
+    else:
+        return jsonify(carpool_dict)
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
