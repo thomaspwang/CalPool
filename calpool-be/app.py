@@ -178,7 +178,6 @@ def get_all_calpools():
             user = User.objects.get(id=carpool.owner.id)
             user_name = user.first_name + " " + user.last_name
             carpool_arr.append({'name': user_name, 'carpool': carpool})
-            # carpool_arr.append({'name': user_name, 'carpool': carpool})
     if not carpool_arr:
         return jsonify({"error": "No carpools available"}), 404
     else:
