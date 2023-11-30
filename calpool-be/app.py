@@ -3,13 +3,11 @@ from flask_cors import CORS
 import datetime as datetime
 import bcrypt
 from mongoengine import NotUniqueError
-from bson import ObjectId
 
 from models import db
 from models.user import User
 from models.trip import Trip
 from datetime import datetime
-import logging
 
 # Setup
 
