@@ -8,6 +8,8 @@ import "./FilterButton.css";
 function FilterButton() {
     const [anchorEl, setAnchorEl] = useState(null);
 
+    console.log(anchorEl)
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };

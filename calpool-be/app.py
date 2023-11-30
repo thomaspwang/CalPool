@@ -16,14 +16,15 @@ app.secret_key = 'plextech'
 
 
 CORS(app) # To prevent CORS errors during local development
-cors = CORS(app, resource={
+cors = CORS(app, supports_credentials=True, resource={
     r"/*":{
         "origins":"*"
     }
 })
 
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+app.config['SESSION_COOKIE_SECURE'] = True
 app.config["MONGODB_HOST"] = "mongodb+srv://username:Password1234@calpool.rvzxgdh.mongodb.net/?retryWrites=true&w=majority"
-
 db.init_app(app)
 
 # Routes
@@ -34,6 +35,7 @@ def nothing():
 @app.route('/ping')
 def pingpong():
     return "pong"
+
 @app.route("/update_profile", methods=["POST"])
 def update_profile():
     user_data = request.json
@@ -61,6 +63,9 @@ def update_profile():
 
 @app.route('/create_trip', methods=['POST'])
 def create_trip():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return jsonify({"error": 'not logged in'}), 401
     try:
         data = request.json
         start_location = data['pickup']
@@ -72,10 +77,6 @@ def create_trip():
         max_people = data['people']
         comments = data['comments']
 
-        # Hardcoded
-        current_user = User.objects(email="fake@gmail.com").first() # to change
-        # current_user = User.objects(id=get_id()).first()
-
         new_trip = Trip(
             start_location=start_location,
             end_location=end_location,
@@ -85,11 +86,11 @@ def create_trip():
             upper_bound=upper_bound,
             max_people=max_people,
             comments=comments,
-            owner=current_user,
-            participants=[current_user])
+            owner=user_id,
+            participants=[user_id])
         
         new_trip.save()
-        add_carpool_to_user(new_trip) 
+        add_carpool_to_user(new_trip, user_id) 
 
         return jsonify({'trip_id': str(new_trip.id)})
 
@@ -97,9 +98,8 @@ def create_trip():
         return jsonify({'error': str(e)}), 500
 
 # Add carpool to user object
-def add_carpool_to_user(trip):
-    # current_user = User.objects(id=get_id()).first()
-    current_user = User.objects(id="655be59f47dfea0dc232cfe0").first()
+def add_carpool_to_user(trip, user_id):
+    current_user = User.objects(id=user_id).first()
     current_user.trips_participating.append(trip) # to change
     current_user.save()
 
@@ -127,7 +127,7 @@ def login():
         user = User.objects.get(email=request.json['email'])
         if bcrypt.checkpw(request.json['password'].encode(), user.password.encode()):
             session['user_id'] = str(user.id)
-            return jsonify({'user_id': str(user.id)})
+            return jsonify({'user_id': session['user_id']})
         else:
             return jsonify({'error': 'Incorrect password'}), 401
     except User.DoesNotExist:
@@ -136,10 +136,11 @@ def login():
         return jsonify({'error': str(e)}), 500
 
 #Get UserID
+@app.route('/get_id', methods=['GET'])
 def get_id():
     try:
-        user_id = session.get('user_id', 'Not set')
-        return str(user_id)
+        user_id = session.get('user_id')
+        return jsonify({'user_id': str(user_id)})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
@@ -166,21 +167,21 @@ def get_user():
         return jsonify({"error": str(e)}), 500
 
 @app.route('/get_all_calpools', methods=['GET'])
-# get all available calpools that aren’t created by you
-# or you aren’t in already (creator != current_user_id)
-def get_all_calpools(): 
-    # all_carpools = Trip.objects(owner__ne = get_id())
-    all_carpools = Trip.objects(owner__ne = "655be59f47dfea0dc232cfe0")
-    carpool_dict = {}
+def get_all_calpools():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return jsonify({"error": 'not logged in'}), 401
+    all_carpools = Trip.objects(owner__ne = user_id, participants__nin=[user_id])
+    carpool_arr = []
     for carpool in all_carpools:
         if carpool.max_people > len(carpool.participants):
             user = User.objects.get(id=carpool.owner.id)
             user_name = user.first_name + " " + user.last_name
-            carpool_dict[user_name] = carpool
-    if not carpool_dict:
-        return jsonify({"message": "No carpools available"})
+            carpool_arr.append({'name': user_name, 'carpool': carpool})
+    if not carpool_arr:
+        return jsonify({"error": "No carpools available"}), 404
     else:
-        return jsonify(carpool_dict)
+        return jsonify({"pools": carpool_arr})
 
 
 if __name__ == "__main__":

@@ -29,7 +29,7 @@ function App() {
           </Route>
           <Route path="/view_carpools" element={<ViewCarpools/>}>
           </Route>
-          <Route path="/" element={<div>HELLO WORLD</div>}>
+          <Route path="/" element={<ViewCarpools/>}>
           </Route>
           <Route path="/create_carpool" element={<CalpoolCreation/>}>
           </Route>
