@@ -38,14 +38,27 @@ def pingpong():
 
 @app.route("/update_profile", methods=["POST"])
 def update_profile():
-    user = User.objects().get(id=request.json['id'])
+    user_data = request.json
+    user_id = user_data.get('id')
+
+    user = User.objects(id=user_id).first()
     if not user:
-        return jsonify({"error: User not found"})
-    
-    else:
-        user.update(first_name=request.json["first name"], last_name=request.json["last name"], gender=request.json['gender'], graduation_year=request.json['graduation_year'] ) 
-    user = User.objects().get(id=request.json['id'])
-    return jsonify(user)
+        return jsonify({"error": "User not found"}), 404
+
+   
+    update_result = User.objects(id=user_id).update_one(
+        set__first_name=user_data.get("first_name"),
+        set__last_name=user_data.get("last_name"),
+        set__gender=user_data.get('gender'),
+        set__graduation_year=user_data.get('graduation_year')
+      
+    )
+
+    if update_result == 0:
+        return jsonify({"error": "No updates made"}), 400
+
+    return jsonify({"message": "Profile updated successfully"}), 200
+
 
 
 @app.route('/create_trip', methods=['POST'])
@@ -156,6 +169,24 @@ def get_user():
         return jsonify({"error": "User not found"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route('/get_all_calpools', methods=['GET'])
+# get all available calpools that aren’t created by you
+# or you aren’t in already (creator != current_user_id)
+def get_all_calpools(): 
+    # all_carpools = Trip.objects(owner__ne = get_id())
+    all_carpools = Trip.objects(owner__ne = "655be59f47dfea0dc232cfe0")
+    carpool_dict = {}
+    for carpool in all_carpools:
+        if carpool.max_people > len(carpool.participants):
+            user = User.objects.get(id=carpool.owner.id)
+            user_name = user.first_name + " " + user.last_name
+            carpool_dict[user_name] = carpool
+    if not carpool_dict:
+        return jsonify({"message": "No carpools available"})
+    else:
+        return jsonify(carpool_dict)
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

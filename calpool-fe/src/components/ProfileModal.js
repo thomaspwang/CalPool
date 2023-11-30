@@ -29,32 +29,23 @@ function ProfileModal({ open, onClose, onSave, initialData}) {
           <TextField
             autoFocus
             margin="dense"
-            name="name"
-            label="Name"
+            name="first"
+            label="First Name"
             type="text"
             fullWidth
             variant="outlined"
-            value={profileData.name}
+            value={profileData.first}
             onChange={handleChange}
           />
           <TextField
+            autoFocus
             margin="dense"
-            name="email"
-            label="Email"
-            type="email"
+            name="last"
+            label="Last Name"
+            type="text"
             fullWidth
             variant="outlined"
-            value={profileData.email}
-            onChange={handleChange}
-          />
-          <TextField
-            margin="dense"
-            name="password"
-            label="Password"
-            type="password"
-            fullWidth
-            variant="outlined"
-            value={profileData.password}
+            value={profileData.last}
             onChange={handleChange}
           />
           <TextField
@@ -66,17 +57,6 @@ function ProfileModal({ open, onClose, onSave, initialData}) {
             variant="outlined"
             value={profileData.graduation}
             onChange={handleChange}
-          />
-          <TextField
-            margin="dense"
-            name="major"
-            label="Major"
-            type="text"
-            fullWidth
-            variant="outlined"
-            value={profileData.major}
-
-          onChange={handleChange}
           />
           <TextField
             margin="dense"
