@@ -4,6 +4,7 @@ import './CarpoolCard.css';
 
 
 function CarpoolCard({creator, date, puTime, puLoc, eta, dest}) {
+    console.log(creator)
     return (
         <div className = "card">
             <div className="parent">
