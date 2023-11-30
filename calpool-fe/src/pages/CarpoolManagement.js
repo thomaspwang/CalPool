@@ -10,11 +10,10 @@ function CarpoolManagement() {
     const [modal, setModal] = useState(false);
     const [profileModalOpen, setProfileModalOpen] = useState(false); 
     const [profileData, setProfileData] = useState({
-        name: 'initial name',
-        email: 'email@berkeley.edu',
-        password: 'password123',
+        id: "6556d7704c68f1e9a7e9f3f4",
+        first: "Danny",
+        last: "Sally",
         graduation: '2026',
-        major: 'Poli Sci',
         gender: 'M',
     });
 
@@ -47,10 +46,38 @@ function CarpoolManagement() {
         setProfileModalOpen(false);
     };
 
-    const handleSaveProfileData = (newData) => {
+    const handleSaveProfileData = async (newData) => {
         setProfileData(newData);
-        
+    
+        const formattedData = {
+            id: newData.id,
+            first_name: newData.first, // assuming 'first' is the first name
+            last_name: newData.last,   // assuming 'last' is the last name
+            gender: newData.gender,
+            graduation_year: newData.graduation // assuming 'graduation' is the graduation year
+        };
+    
+        try {
+            const response = await fetch("http://127.0.0.1:5001/update_profile", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formattedData)
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            const data = await response.json();
+            console.log(data); 
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
     };
+    
 
     return (
         <div className="CM__organization">
