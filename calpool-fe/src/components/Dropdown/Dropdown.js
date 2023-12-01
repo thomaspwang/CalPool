@@ -1,7 +1,7 @@
 import { MenuItem, Select } from "@mui/material";
 import "./Dropdown.css";
 
-export default function Dropdown({ options, label, onChange, name, value }) {
+export default function Dropdown({ options, label, onChange, name, value, width, transparent }) {
   return (
     <div className="dropdown">
       <h1 className="title">{label}</h1>
@@ -10,7 +10,8 @@ export default function Dropdown({ options, label, onChange, name, value }) {
         name={name}
         onChange={onChange}
         variant="outlined"
-        classes={{ root: "custom-select-root" }}
+        classes={{ root: transparent ? "custom-select-root-transparent" : "custom-select-root" }}
+        sx={{width: width}}
       >
         {options.map((option, index) => (
           <MenuItem value={option} key={index} className="menu">

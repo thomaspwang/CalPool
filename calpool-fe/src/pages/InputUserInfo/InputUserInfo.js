@@ -29,7 +29,7 @@ const InputUserInfo = ({ form, setForm, setPage }) => {
         <TextInput type='text' error={form.number.error} placeholder="Mobile Phone" name='number' onChange={(event) => handleFormChange(event, setForm)} value={form.number.value}/>
         <TextInput type='text' error={form.major.error} placeholder="Major" name='major' onChange={(event) => handleFormChange(event, setForm)} value={form.major.value}/>
         <RadiosGroup radios={genderRadioOptions} error={form.gender.error} label='Gender' name='gender' onChange={(event) => handleFormChange(event, setForm)} value={form.gender.value}/>
-        <Dropdown options={gradYearOptions} label='Graduation Year' name='grad_year' value={form.grad_year.value} onChange={(event) => handleFormChange(event, setForm)}/>
+        <Dropdown width='140px' options={gradYearOptions} label='Graduation Year' name='grad_year' value={form.grad_year.value} onChange={(event) => handleFormChange(event, setForm)}/>
       <Button type='submit' color='primary' loading={false} disabled={disabled}>Next</Button>
       </form>
     </div>

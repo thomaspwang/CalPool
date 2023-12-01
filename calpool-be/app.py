@@ -38,18 +38,34 @@ def pingpong():
 
 @app.route("/update_profile", methods=["POST"])
 def update_profile():
-    user = User.objects().get(id=request.json['id'])
+    user_data = request.json
+    user_id = user_data.get('id')
+
+    user = User.objects(id=user_id).first()
     if not user:
-        return jsonify({"error: User not found"})
-    
-    else:
-        user.update(first_name=request.json["first name"], last_name=request.json["last name"], gender=request.json['gender'], graduation_year=request.json['graduation_year'] ) 
-    user = User.objects().get(id=request.json['id'])
-    return jsonify(user)
+        return jsonify({"error": "User not found"}), 404
+
+   
+    update_result = User.objects(id=user_id).update_one(
+        set__first_name=user_data.get("first_name"),
+        set__last_name=user_data.get("last_name"),
+        set__gender=user_data.get('gender'),
+        set__graduation_year=user_data.get('graduation_year')
+      
+    )
+
+    if update_result == 0:
+        return jsonify({"error": "No updates made"}), 400
+
+    return jsonify({"message": "Profile updated successfully"}), 200
+
 
 
 @app.route('/create_trip', methods=['POST'])
 def create_trip():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return jsonify({"error": 'not logged in'}), 401
     try:
         data = request.json
         start_location = data['pickup']
@@ -61,11 +77,6 @@ def create_trip():
         max_people = data['people']
         comments = data['comments']
 
-        # Hardcoded
-        current_user = User.objects(email="fake@gmail.com").first() # to change
-        # id_object = get_id()
-        # current_user = User.objects(id=id_object['user_id']).first()
-
         new_trip = Trip(
             start_location=start_location,
             end_location=end_location,
@@ -75,11 +86,11 @@ def create_trip():
             upper_bound=upper_bound,
             max_people=max_people,
             comments=comments,
-            owner=current_user,
-            participants=[current_user])
+            owner=user_id,
+            participants=[user_id])
         
         new_trip.save()
-        add_carpool_to_user(new_trip) 
+        add_carpool_to_user(new_trip, user_id) 
 
         return jsonify({'trip_id': str(new_trip.id)})
 
@@ -87,10 +98,8 @@ def create_trip():
         return jsonify({'error': str(e)}), 500
 
 # Add carpool to user object
-def add_carpool_to_user(trip):
-    # id_object = get_id()
-    # current_user = User.objects(id=id_object['user_id']).first()
-    current_user = User.objects(id="655be59f47dfea0dc232cfe0").first()
+def add_carpool_to_user(trip, user_id):
+    current_user = User.objects(id=user_id).first()
     current_user.trips_participating.append(trip) # to change
     current_user.save()
 
@@ -156,6 +165,24 @@ def get_user():
         return jsonify({"error": "User not found"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route('/get_all_calpools', methods=['GET'])
+def get_all_calpools():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return jsonify({"error": 'not logged in'}), 401
+    all_carpools = Trip.objects(owner__ne = user_id, participants__nin=[user_id])
+    carpool_arr = []
+    for carpool in all_carpools:
+        if carpool.max_people > len(carpool.participants):
+            user = User.objects.get(id=carpool.owner.id)
+            user_name = user.first_name + " " + user.last_name
+            carpool_arr.append({'name': user_name, 'carpool': carpool})
+    if not carpool_arr:
+        return jsonify({"error": "No carpools available"}), 404
+    else:
+        return jsonify({"pools": carpool_arr})
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
