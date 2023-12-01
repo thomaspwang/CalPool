@@ -66,7 +66,8 @@ function CarpoolManagement() {
         };
     
         try {
-            const response = await fetch("http://127.0.0.1:5001/update_profile", {
+            const backendUrl = process.env.REACT_APP_BACKEND_URL;
+            const response = await fetch(backendUrl + "update_profile", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

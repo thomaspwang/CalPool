@@ -1,5 +1,6 @@
 const createNewCarPoolApi = async ({depart, arrive, range, pickup, destination, people, comments}) => {
-    const result = await fetch("http://localhost:5001/create_trip", {
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    const result = await fetch(backendUrl + "create_trip", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

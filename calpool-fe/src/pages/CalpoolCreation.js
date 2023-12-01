@@ -39,7 +39,8 @@ export default function CalpoolCreation() {
     };
 
     const createNewCarPool = async () => {
-        fetch('http://127.0.0.1:5001/create_trip', {
+        const backendUrl = process.env.REACT_APP_BACKEND_URL;
+        fetch(backendUrl + 'create_trip', {
             method: 'POST',
             headers: {
               Accept: 'application.json',

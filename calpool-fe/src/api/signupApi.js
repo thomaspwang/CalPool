@@ -8,7 +8,8 @@ const signupApi = async (
   graduation_year,
   major
 ) => {
-  const result = await fetch("http://localhost:5001/signup", {
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const result = await fetch(backendUrl + "signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

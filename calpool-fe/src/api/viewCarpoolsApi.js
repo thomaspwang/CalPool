@@ -1,5 +1,7 @@
 const viewCarpoolsApi = async () => {
-  const result = await fetch("http://localhost:5001/get_all_calpools", {
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  console.log(backendUrl)
+  const result = await fetch(backendUrl + "get_all_calpools", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -1,5 +1,6 @@
 const userContextAPI = async () => {
-    const result = await fetch("http://localhost:5001/get_id", {
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    const result = await fetch(backendUrl + "get_id", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

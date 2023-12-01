@@ -1,5 +1,6 @@
 const loginApi = async (email, password) => {
-  const result = await fetch("http://localhost:5001/login", {
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const result = await fetch(backendUrl + "login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
