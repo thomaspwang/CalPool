@@ -82,6 +82,7 @@ function ViewCarpools() {
                 people: people,
                 comments: comments,
             }),
+            credentials: 'include',
         })
         .then(response => {
             response.json();

@@ -23,6 +23,7 @@ const signupApi = async (
       graduation_year: graduation_year,
       major: major,
     }),
+    credentials: 'include',
   });
   const resultStatus = await result.json();
   return resultStatus;
