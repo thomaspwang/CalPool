@@ -33,6 +33,10 @@ function ViewCarpools() {
   const [filter, setFilter] = useState("Most Recent");
   const navigate = useNavigate();
 
+  const navigateToManagement = () => {
+    navigate('/carpool_management');
+  };
+
   useEffect(() => {
     getCarpools();
   }, []);
@@ -136,6 +140,13 @@ function ViewCarpools() {
             onClick={handleClickOpen}
           >
             New Carpool
+          </Button>
+          <Button
+            variant="contained"
+            className="new-carpool-btn"
+            onClick={navigateToManagement}
+          >
+            Your Carpools
           </Button>
         </div>
         <TitleBar

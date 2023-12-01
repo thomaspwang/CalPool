@@ -5,6 +5,8 @@ import "./CarpoolManagement.css";
 import CarpoolCard from "../components/CarpoolCard/CarpoolCard";
 import Modal from "../components/Modal/Modal";
 import ProfileModal from "../components/ProfileModal"; 
+import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 function CarpoolManagement() {
     const [modal, setModal] = useState(false);
@@ -16,6 +18,12 @@ function CarpoolManagement() {
         graduation: '2026',
         gender: 'M',
     });
+
+    const navigate = useNavigate();
+
+    const navigateToHome = () => {
+        navigate('/');
+    };
 
     useEffect(() => {
         const upcomingClickable = document.getElementById('upcoming-clickable'); 
@@ -83,8 +91,22 @@ function CarpoolManagement() {
         <div className="CM__organization">
             <ProfileDisplay firstname="Mohan" instagram="@mohanxu" lastname="Xu" email="mohanxu@berkeley.edu" phone="xxx-xxx-xxxx" img="https://static.vecteezy.com/system/resources/previews/009/749/751/original/avatar-man-icon-cartoon-male-profile-mascot-illustration-head-face-business-user-logo-free-vector.jpg" />
 
-            {}
-            <button onClick={openProfileModal}>Edit Profile</button>
+            <Button
+                variant="contained"
+                className="new-carpool-btn"
+                onClick={navigateToHome}
+            >
+                Find Carpools
+            </Button>
+
+            <Button
+                variant="contained"
+                className="new-carpool-btn"
+                onClick={openProfileModal}
+            >
+                Edit Profile
+            </Button>
+
 
             <TitleBar BarName="UpComing Trips :" />
             <div className="cards" id='upcoming-clickable'>
