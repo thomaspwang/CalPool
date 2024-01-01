@@ -62,56 +62,74 @@ function CarpoolManagement() {
     };
 
     const getUser = async () => {
-        const result =  fetch("http://127.0.0.1:8000/get_user_info", {
-            method:'POST', 
-            headers: {
-                Accept: 'application.json',
-                'Content-Type': 'application/json'
-              },
-            body: JSON.stringify({"id": "6556d7704c68f1e9a7e9f3f4" })
-        }) 
-        .then(result => {
-            return result.json()
-        })
-        .then(data => {
-            setProfileData(data)
-        })
-    }
+        try {
+            const response = await fetch("http://127.0.0.1:8000/get_user_info", {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "id": "6556d7704c68f1e9a7e9f3f4" })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to fetch user data');
+            }
+    
+            const data = await response.json();
+            setProfileData(data);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
+    };
+    
 
 
-    const getUpComing = async() => {
-        const result =  fetch("http://127.0.0.1:8000/retrieve_upcoming", {
-            method:'POST', 
-            headers: {
-                Accept: 'application.json',
-                'Content-Type': 'application/json'
-              },
-            body: JSON.stringify({"id": "655be59f47dfea0dc232cfe0" })
-        }) 
-        .then(result => {
-            return result.json()
-        })
-        .then(data => {
+    const getUpComing = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/retrieve_upcoming", {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "id": "655be59f47dfea0dc232cfe0" })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to fetch upcoming trips');
+            }
+    
+            const data = await response.json();
             setupcomingTrips(data);
-        })
-    }
+        } catch (error) {
+            console.error('Error fetching upcoming trips:', error);
+        }
+    };
+    
 
-    const getPast = async() => {
-        const result =  fetch("http://127.0.0.1:8000/retrieve_past", {
-            method:'POST', 
-            headers: {
-                Accept: 'application.json',
-                'Content-Type': 'application/json'
-              },
-            body: JSON.stringify({"id": "655be59f47dfea0dc232cfe0" })
-        }) 
-        .then(result => {
-            return result.json()
-        })
-        .then(data => {
+    const getPast = async () => {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/retrieve_past", {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "id": "655be59f47dfea0dc232cfe0" })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to fetch past trips');
+            }
+    
+            const data = await response.json();
             setpastTrips(data);
-        })
-    }
+        } catch (error) {
+            console.error('Error fetching past trips:', error);
+        }
+    };
+    
 
 
 
