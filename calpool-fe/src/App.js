@@ -1,7 +1,7 @@
 import theme from './theme';    
 import './App.css';
 import CarpoolMangement from './pages/CarpoolManagement'; 
-import ViewCarpools from './pages/ViewCarpools.js';
+import ViewCarpools from './pages/ViewCarpools/ViewCarpools';
 import CalpoolCreation from './pages/CalpoolCreation';
 import {
   BrowserRouter as Router,
@@ -9,15 +9,19 @@ import {
   Routes,
 } from "react-router-dom";
 import Login from './pages/Login/Login'
-import SignUp from './pages/SignUp/SignUp'
+import Verification from './pages/Verification/Verification.js';
 import { ThemeProvider } from '@mui/material/styles';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword.js';
+import SignUpParent from './pages/SignUpParent/SignUpParent.js';
 
 function App() {
   return (
-    <ThemeProvider theme={theme} className="App">
+    <ThemeProvider theme={theme}>
       <Router>
         <Routes>
-          <Route path='/signup' element={<SignUp/>} />
+          <Route path='/forgotpassword' element={<ForgotPassword />}/>
+          <Route path='/verify' element={<Verification />} />
+          <Route path='/signup' element={<SignUpParent/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/about">
           </Route>

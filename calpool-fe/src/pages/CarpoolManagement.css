@@ -1,8 +1,14 @@
 .CM__organization {
     display: flex;
     flex-direction: column;
+    align-items: left;
+    gap: 5px;
+}
+.profile_section {
+    display: flex; 
+    flex-direction: column; 
     align-items: center;
-    gap: 70px;
+    margin-bottom: 0px;
 }
 
 .cards {
@@ -14,7 +20,6 @@
 
 .edit-profile-button {
     padding: 8px 16px;
-    margin-top: 20px; 
     font-size: 14px; 
     cursor: pointer;
     border-radius: 4px;

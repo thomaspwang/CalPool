@@ -9,5 +9,5 @@ class User(db.Document):
     phone_number = db.StringField(required=True)
     graduation_year = db.IntField(required=True)
     major = db.StringField(required=True)
-    trips_owned = db.ListField(db.ReferenceField('Trip'))
-    trips_participating = db.ListField(db.ReferenceField('Trip'), dbre=True)
+    trips_owned = db.ListField(db.ReferenceField('Trip', dbref=True))
+    trips_participating = db.ListField(db.ReferenceField('Trip', dbref=True))

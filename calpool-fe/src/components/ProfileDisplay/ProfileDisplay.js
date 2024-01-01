@@ -1,7 +1,7 @@
 import React from 'react'; 
 import "./ProfileDisplay.css"; 
 
-function ProfileDisplay({firstname, lastname, email, phone, instagram, img}) {
+function ProfileDisplay({firstname, lastname, email, phone, img, grade, major, gender}) {
 
 
     return (
@@ -11,8 +11,9 @@ function ProfileDisplay({firstname, lastname, email, phone, instagram, img}) {
 
                 <div className="contact_data">
                     <h1>{firstname} {lastname}</h1>
-                    <p>{email} {phone} {instagram}</p>
-                    <p>Some description that the user can pass in, such as major or grade</p>
+                    <p>{email} {phone} </p>
+                    <p>Year: {grade} <div></div>
+                    Major: {major} <div></div>Gender: {gender}</p>
                 </div>
 
             </div>

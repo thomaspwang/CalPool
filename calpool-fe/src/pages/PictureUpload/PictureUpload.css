@@ -1,0 +1,33 @@
+.circle-signup {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #D9D9D9;
+    align-self: center;
+    border: 1px solid black;
+    position: relative;
+
+  }
+  
+  .circle-signup.drag-over {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 2px dashed #000;
+  }
+  
+  .heading-pic {
+    font-size: 2.4em;
+    text-align: center;
+  }
+
+  .circle-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: bold;
+  }

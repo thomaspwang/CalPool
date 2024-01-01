@@ -11,6 +11,7 @@ function CarpoolManagement() {
     const [profileModalOpen, setProfileModalOpen] = useState(false); 
     const [upComingTrips, setupcomingTrips] = useState([]);
     const [pastTrips, setpastTrips] = useState([]);
+    const [selectedTrip, setSelectedTrip] = useState(null);
 
     const [profileData, setProfileData] = useState({
         first_name: 'initial name',
@@ -23,22 +24,23 @@ function CarpoolManagement() {
     });
 
     useEffect(() => {
-        const upcomingClickable = document.getElementById('upcoming-clickable'); 
-        const pastClickable = document.getElementById('past-clickable'); 
+        // const upcomingClickable = document.getElementById('upcoming-clickable'); 
+        // const pastClickable = document.getElementById('past-clickable'); 
         getUser();
         getUpComing();
         getPast();
 
-        upcomingClickable.addEventListener('click', openModal);
-        pastClickable.addEventListener('click', openModal);
+        // upcomingClickable.addEventListener('click', openModal); 
+        // pastClickable.addEventListener('click', openModal);
 
         return () => {
-            upcomingClickable.removeEventListener('click', openModal);
-            pastClickable.removeEventListener('click', openModal);
+            // upcomingClickable.removeEventListener('click', openModal);
+            // pastClickable.removeEventListener('click', openModal);
         };
     }, []);
     
-    const openModal = () => {
+    const openModal = (trip) => {
+        setSelectedTrip(trip); 
         setModal(true);
     };
 
@@ -76,6 +78,7 @@ function CarpoolManagement() {
         })
     }
 
+
     const getUpComing = async() => {
         const result =  fetch("http://127.0.0.1:8000/retrieve_upcoming", {
             method:'POST', 
@@ -110,33 +113,52 @@ function CarpoolManagement() {
         })
     }
 
+
+
     // const getUpcoming = async () => {
     //     const result = await fetch('')
     // }
 
     return (
         <div className="CM__organization">
-            <ProfileDisplay firstname={profileData.first_name} lastname={profileData.last_name} email={profileData.email} phone="xxx-xxx-xxxx" img="https://static.vecteezy.com/system/resources/previews/009/749/751/original/avatar-man-icon-cartoon-male-profile-mascot-illustration-head-face-business-user-logo-free-vector.jpg" />
-
-            {}
+            <div className="profile_section">
+            <ProfileDisplay major={profileData.major} 
+            grade={profileData.graduation_year} gender ={profileData.gender}
+            firstname={profileData.first_name} lastname={profileData.last_name} 
+            email={profileData.email} phone={profileData.phone_number}img="https://static.vecteezy.com/system/resources/previews/009/749/751/original/avatar-man-icon-cartoon-male-profile-mascot-illustration-head-face-business-user-logo-free-vector.jpg" />
             <button onClick={openProfileModal}>Edit Profile</button>
-
+            </div>
             <TitleBar BarName="UpComing Trips :" />
             <div className="cards" id='upcoming-clickable'>
-            {upComingTrips.map((trip) => <CarpoolCard creator={trip.owner} puTime={trip.start_time} puLoc={trip.start_location} eta={trip.end_time} dest={trip.end_location}/>)}
+            {upComingTrips.map((trip) => {
+            return <CarpoolCard 
+            onClick={() => openModal(trip)}
+            key={trip.id}
+            opened_from_cpManagement={true}
+            creator={trip.owner.$ref} puTime={trip.start_time.$date}
+             puLoc={trip.start_location} eta={trip.end_time.$date} 
+             dest={trip.end_location}/>
+            })}
             
             </div>
             
             <TitleBar BarName="Past Trips :" />
             <div className="cards" id='past-clickable'>
-            {pastTrips.map((trip) => <CarpoolCard creator={trip.owner} puTime={trip.start_time} puLoc={trip.start_location} eta={trip.end_time} dest={trip.end_location}/>)}
+            {pastTrips.map((trip) =>  {
+                console.log(trip)
+            return <CarpoolCard onClick={() => openModal(trip)} key={trip.id} opened_from_cpManagement={true}
+            creator={trip.owner.$ref} 
+            puTime={trip.start_time.$date} puLoc={trip.start_location} 
+            eta={trip.end_time.$date} dest={trip.end_location}/>
+            })}
 
             </div>
 
-            {modal && <Modal onClose={closeModal} />}
+            {modal && <Modal onClose={closeModal} creator={selectedTrip.owner.$ref} puTime={selectedTrip.start_time.$date} puLoc={selectedTrip.start_location} 
+            eta={selectedTrip.end_time.$date} dest={selectedTrip.end_location} participants={selectedTrip.participants} />}
             <ProfileModal
                 open={profileModalOpen}
-                onClose={closeProfileModal}
+                onClose={closeProfileModal}ß
                 onSave={handleSaveProfileData}
                 initialData={profileData}
             />

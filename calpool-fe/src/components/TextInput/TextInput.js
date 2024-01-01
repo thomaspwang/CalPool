@@ -40,6 +40,7 @@ const TextInput = ({
         style={style}
         onChange={onChange}
         value={value}
+        autoComplete="off"
         />
         {error && <h1 className="error-label">{error}</h1>}
       </div>
